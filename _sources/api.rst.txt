@@ -7,6 +7,9 @@ Orion Sweeper
     :show-inheritance:
 
 
+Configuration
+=============
+
 .. automodule:: hydra_orion_sweeper.config
     :members:
     :undoc-members:
