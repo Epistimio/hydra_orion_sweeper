@@ -18,7 +18,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="hydra_orion_sweeper" href="api.html" /> 
+    <link rel="next" title="Orion Sweeper" href="api.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,7 +41,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api.html">hydra_orion_sweeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Orion Sweeper</a></li>
 </ul>
 
         </div>
@@ -63,7 +63,7 @@
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="api.html" class="btn btn-neutral float-right" title="hydra_orion_sweeper" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="api.html" class="btn btn-neutral float-right" title="Orion Sweeper" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
@@ -81,19 +81,88 @@ algorithms for the optimization of the parameters of any experiment.</p>
 <p>See <a class="reference external" href="https://orion.readthedocs.io">website</a> for more information</p>
 <section id="install">
 <h2>Install<a class="headerlink" href="#install" title="Permalink to this headline"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install hydra_orion_sweeper
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install hydra-orion-sweeper
 </pre></div>
 </div>
 </section>
+<section id="search-space">
+<h2>Search Space<a class="headerlink" href="#search-space" title="Permalink to this headline"></a></h2>
+<p>Orion defines 5 different dimensions that can be used to define your search space.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">uniform(low,</span> <span class="pre">high,</span> <span class="pre">[discrete=False,</span> <span class="pre">precision=4,</span> <span class="pre">shape=None,</span> <span class="pre">default_value=None])</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loguniform(low,</span> <span class="pre">high,</span> <span class="pre">[discrete=False,</span> <span class="pre">precision=4,</span> <span class="pre">shape=None,</span> <span class="pre">default_value=None])</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">normal(loc,</span> <span class="pre">scale,</span> <span class="pre">[discrete=False,</span> <span class="pre">precision=4,</span> <span class="pre">shape=None,</span> <span class="pre">default_value=None])</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">choices(*options)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fidelity(low,</span> <span class="pre">high,</span> <span class="pre">base=2)</span></code></p></li>
+</ul>
+<p>Fidelity is a special dimension that is used to represent the training time, you can think of it as the <code class="docutils literal notranslate"><span class="pre">epoch</span></code> dimension.</p>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline"></a></h2>
+<p>For in-depth documentation about the plugin and its configuration options,
+you should refer to <a class="reference external" href="https://orion.readthedocs.io/en/stable/index.html">Orion</a> as the plugin
+configurations are simply passed through.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://orion.readthedocs.io/en/stable/user/algorithms.html">algorithm</a></p></li>
+<li><p><a class="reference external" href="https://orion.readthedocs.io/en/stable/user/config.html#worker">worker</a></p></li>
+<li><p><a class="reference external" href="https://orion.readthedocs.io/en/stable/user/config.html#database">storage</a></p></li>
+<li><p><a class="reference external" href="https://orion.readthedocs.io/en/stable/user/searchspace.html">parametrization</a></p></li>
+</ul>
+</section>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">my_app</span><span class="o">.</span><span class="n">yaml</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">defaults</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">override</span> <span class="n">hydra</span><span class="o">/</span><span class="n">sweeper</span><span class="p">:</span> <span class="n">orion</span>
+
+<span class="n">hydra</span><span class="p">:</span>
+<span class="n">sweeper</span><span class="p">:</span>
+   <span class="n">orion</span><span class="p">:</span>
+      <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;experiment&#39;</span>
+      <span class="n">version</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span>
+
+   <span class="n">algorithm</span><span class="p">:</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="n">random</span>
+      <span class="n">config</span><span class="p">:</span>
+      <span class="n">seed</span><span class="p">:</span> <span class="mi">1</span>
+
+   <span class="n">worker</span><span class="p">:</span>
+      <span class="n">n_workers</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+      <span class="n">max_broken</span><span class="p">:</span> <span class="mi">3</span>
+      <span class="n">max_trials</span><span class="p">:</span> <span class="mi">100</span>
+
+   <span class="n">storage</span><span class="p">:</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="n">pickledb</span>
+      <span class="n">host</span><span class="p">:</span> <span class="s1">&#39;database.pkl&#39;</span>
+
+   <span class="c1"># default parametrization of the search space</span>
+   <span class="n">parametrization</span><span class="p">:</span>
+      <span class="n">a</span><span class="p">:</span> <span class="s2">&quot;uniform(0, 1)&quot;</span>
+      <span class="n">b</span><span class="p">:</span> <span class="s2">&quot;uniform(0, 1)&quot;</span>
+
+<span class="c1"># Default values</span>
+<span class="n">a</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">b</span><span class="p">:</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hydra</span>
+<span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">DictConfig</span>
+
+<span class="nd">@hydra</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">config_name</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="n">version_base</span><span class="o">=</span><span class="s2">&quot;1.1&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">DictConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+   <span class="sd">&quot;&quot;&quot;Simple main function&quot;&quot;&quot;</span>
+   <span class="n">a</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">a</span>
+   <span class="n">b</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">b</span>
+
+   <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+   <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api.html">hydra_orion_sweeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Orion Sweeper</a></li>
 </ul>
 </div>
 </section>
@@ -103,7 +172,7 @@ algorithms for the optimization of the parameters of any experiment.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="api.html" class="btn btn-neutral float-right" title="hydra_orion_sweeper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="api.html" class="btn btn-neutral float-right" title="Orion Sweeper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
