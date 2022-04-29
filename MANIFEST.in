@@ -1,0 +1,9 @@
+global-exclude *.pyc
+global-exclude __pycache__
+recursive-include hydra_plugins/* *.yaml
+
+exclude tox.ini
+exclude .pylintrc
+prune docs
+prune example
+prune tests
