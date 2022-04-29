@@ -1,7 +1,7 @@
-options
+hydra_orion_sweeper
 =============================
 
-.. automodule:: options
+.. automodule:: hydra_orion_sweeper
     :members:
     :undoc-members:
     :show-inheritance:
