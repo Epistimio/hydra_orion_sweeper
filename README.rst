@@ -1,7 +1,7 @@
 Hydra Sweeper plugin for Orion
 ==============================
 
-|pypi| |py_versions|
+|pypi| |py_versions| |codecov| |docs| |tests| |style|
 
 .. |pypi| image:: https://img.shields.io/pypi/v/hydra-orion-sweeper.svg
     :target: https://pypi.python.org/pypi/hydra-orion-sweeper
@@ -11,16 +11,16 @@ Hydra Sweeper plugin for Orion
     :target: https://pypi.python.org/pypi/hydra-orion-sweeper
     :alt: Supported Python Versions
   
-.. image:: https://codecov.io/gh/Epistimio/hydra_orion_sweeper/branch/master/graph/badge.svg?token=40Cr8V87HI
+.. |codecov| image:: https://codecov.io/gh/Epistimio/hydra_orion_sweeper/branch/master/graph/badge.svg?token=40Cr8V87HI
    :target: https://codecov.io/gh/Epistimio/hydra_orion_sweeper
 
-.. image:: https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/docs.yml/badge.svg?branch=master
+.. |docs| image:: https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/docs.yml/badge.svg?branch=master
    :target: https://epistimio.github.io/hydra_orion_sweeper/
 
-.. image:: https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/test.yml/badge.svg?branch=master
+.. |tests| image:: https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/test.yml/badge.svg?branch=master
    :target: https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/test.yml
 
-.. image:: https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/style.yml/badge.svg?branch=master
+.. |style| image:: https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/style.yml/badge.svg?branch=master
    :target: https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/style.yml
 
 
