@@ -1,6 +1,8 @@
 Hydra Sweeper plugin for Orion
 ==============================
 
+|pypi| |py_versions|
+
 .. |pypi| image:: https://img.shields.io/pypi/v/hydra-orion-sweeper.svg
     :target: https://pypi.python.org/pypi/hydra-orion-sweeper
     :alt: Current PyPi Version
