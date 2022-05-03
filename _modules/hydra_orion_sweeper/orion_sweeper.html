@@ -93,7 +93,7 @@
         <span class="n">storage</span><span class="p">:</span> <span class="n">StorageConf</span><span class="p">,</span>
         <span class="n">parametrization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DictConfig</span><span class="p">],</span>
     <span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">._impl</span> <span class="kn">import</span> <span class="n">OrionSweeperImpl</span>
+        <span class="kn">from</span> <span class="nn">.implementation</span> <span class="kn">import</span> <span class="n">OrionSweeperImpl</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">sweeper</span> <span class="o">=</span> <span class="n">OrionSweeperImpl</span><span class="p">(</span>
             <span class="n">orion</span><span class="p">,</span> <span class="n">worker</span><span class="p">,</span> <span class="n">algorithm</span><span class="p">,</span> <span class="n">storage</span><span class="p">,</span> <span class="n">parametrization</span>
