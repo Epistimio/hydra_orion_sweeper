@@ -6,7 +6,7 @@ Hydra Sweeper plugin for Orion
    :target: https://codecov.io/gh/Epistimio/hydra_orion_sweeper
 
 .. image:: https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/docs.yml/badge.svg?branch=master
-   :target: https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/docs.yml
+   :target: https://epistimio.github.io/hydra_orion_sweeper/
 
 .. image:: https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/test.yml/badge.svg?branch=master
    :target: https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/test.yml
