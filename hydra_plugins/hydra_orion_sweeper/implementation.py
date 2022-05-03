@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+Implements a sweeper plugin for Orion.
+"""
 import logging
 import os
 from contextlib import contextmanager
@@ -33,7 +36,7 @@ from .config import AlgorithmConf, OrionClientConf, StorageConf, WorkerConf
 
 log = logging.getLogger(__name__)
 
-
+# pylint: disable=too-few-public-methods
 class SpaceFunction:
     """Type to recognize orion functions parsed by the override parser"""
 
@@ -228,9 +231,7 @@ class SpaceParser:
             if values.step == 1:
                 return build_dim(name).uniform(values.start, values.stop, discrete=True)
 
-            choices = [
-                v for v in range(values.start, values.stop + values.step, values.step)
-            ]
+            choices = list(range(values.start, values.stop + values.step, values.step))
             return build_dim(name).choices(*choices)
 
         elif override.is_interval_sweep():
@@ -259,13 +260,17 @@ class SpaceParser:
 
 @contextmanager
 def clientctx(client):
+    """Automatically close an orion client"""
     try:
         yield client
     finally:
         client.close()
 
 
+# pylint: disable=too-many-public-methods
 class OrionSweeperImpl(Sweeper):
+    """Implementation of the orion Sweeper"""
+
     def __init__(
         self,
         orion: OrionClientConf,
@@ -274,6 +279,11 @@ class OrionSweeperImpl(Sweeper):
         storage: StorageConf,
         parametrization: Optional[DictConfig],
     ):
+        self.space = None
+        self.arguments = dict()
+        self.pending_trials = set()
+        self.client = None
+
         self.orion_config = orion
         self.worker_config = worker
         self.algo_config = algorithm
@@ -294,11 +304,12 @@ class OrionSweeperImpl(Sweeper):
         task_function: TaskFunction,
         config: DictConfig,
     ) -> None:
+        """Setup the hydra launcher"""
         self.job_idx = 0
         self.config = config
         self.hydra_context = hydra_context
-        self.pending_trials = set()
 
+        self.pending_trials = set()
         self.space = None
         self.arguments = dict()
 
@@ -309,9 +320,11 @@ class OrionSweeperImpl(Sweeper):
         )
 
     def working_directory(self):
+        """Fetch working directory"""
         return self.config.hydra.sweep.dir
 
     def n_workers(self):
+        """Fetch the number of worker"""
         n = self.worker_config.n_workers
         if n <= 0:
             return os.cpu_count()
@@ -394,7 +407,7 @@ class OrionSweeperImpl(Sweeper):
             except AlreadyReleased:
                 pass
 
-    def optimize(self, client: ExperimentClient) -> None:
+    def optimize(self, _: ExperimentClient) -> None:
         """Run the hyperparameter search in batches"""
         failures = []
 
@@ -448,7 +461,7 @@ class OrionSweeperImpl(Sweeper):
             objective = to_objective(value)
             self.client.observe(trial, objective)
 
-        except Exception as e:
+        except Exception as e:  # pylint: disable=broad-except
             self.client.release(trial, status="broken")
             result.status = utils.JobStatus.FAILED
             result.return_value = e
