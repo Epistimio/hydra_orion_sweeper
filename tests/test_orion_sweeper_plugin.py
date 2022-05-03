@@ -13,7 +13,7 @@ from hydra.test_utils.test_utils import (
 from omegaconf import DictConfig, OmegaConf
 from pytest import mark
 
-from hydra_plugins.hydra_orion_sweeper import _impl
+from hydra_plugins.hydra_orion_sweeper import implementation
 from hydra_plugins.hydra_orion_sweeper.orion_sweeper import OrionSweeper
 
 chdir_plugin_root()
@@ -84,7 +84,7 @@ def test_space_parser(overrides):
     space_params = deepcopy(parametrization)
     space_params.pop("r1")
 
-    parser = _impl.SpaceParser()
+    parser = implementation.SpaceParser()
     parser.add_from_parametrization(parametrization)
 
     space, args = parser.space()
@@ -116,7 +116,7 @@ orion_functions_overrides = [
 
 
 def test_override_parser():
-    parser = _impl.override_parser()
+    parser = implementation.override_parser()
     parsed = parser.parse_overrides(orion_functions_overrides)
 
     for override in parsed:
@@ -125,7 +125,7 @@ def test_override_parser():
 
         target = overriden_parametrization.get(name)
 
-        assert isinstance(values, _impl.SpaceFunction)
+        assert isinstance(values, implementation.SpaceFunction)
         dim = values(name)
 
         assert dim.get_prior_string() == target

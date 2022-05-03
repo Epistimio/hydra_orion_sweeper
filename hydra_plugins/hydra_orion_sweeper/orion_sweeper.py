@@ -23,7 +23,7 @@ class OrionSweeper(Sweeper):
         storage: StorageConf,
         parametrization: Optional[DictConfig],
     ):
-        from ._impl import OrionSweeperImpl
+        from .implementation import OrionSweeperImpl
 
         self.sweeper = OrionSweeperImpl(
             orion, worker, algorithm, storage, parametrization
