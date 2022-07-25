@@ -31,12 +31,18 @@ class WorkerConf:
     max_broken: int = 3
 
 
+
+@dataclass
+class Database:
+    type: str = "pickleddb"
+    host: str = "orion_database.pkl"
+
 @dataclass
 class StorageConf:
     """Orion storage configuration"""
 
-    type: str = "pickledb"
-    host: str = "orion_database.pkl"
+    type: str = "legacy"
+    database: Database = Database()
 
 
 @dataclass

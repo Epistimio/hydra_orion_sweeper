@@ -33,6 +33,7 @@ from orion.core.utils.exceptions import (
 )
 from orion.core.utils.flatten import flatten
 from orion.core.worker.trial import AlreadyReleased, Trial
+from orion.storage.base import setup_storage, get_storage
 
 from .config import AlgorithmConf, OrionClientConf, StorageConf, WorkerConf
 
@@ -369,7 +370,9 @@ class OrionSweeperImpl(Sweeper):
         logger.debug("Starting launcher")
 
         self.launcher = Plugins.instance().instantiate_launcher(
-            hydra_context=hydra_context, task_function=task_function, config=config
+            hydra_context=hydra_context,
+            task_function=task_function,
+            config=config,
         )
 
     def working_directory(self):
@@ -415,8 +418,12 @@ class OrionSweeperImpl(Sweeper):
         algo_type = dict_config.pop("type", "random")
         algo_config = dict_config.pop("config", dict())
 
+        storage_config = OmegaConf.to_container(self.storage_config)
+        storage = setup_storage(storage_config) or get_storage()
+
         logger.info("Orion Optimizer %s", self.algo_config)
         logger.info("with parametrization %s", self.space.configuration)
+        logger.info("Using Storage: %s", storage)
 
         return create_experiment(
             name=self.orion_config.name,
@@ -426,7 +433,7 @@ class OrionSweeperImpl(Sweeper):
             strategy=None,
             max_trials=self.worker_config.max_trials,
             max_broken=self.worker_config.max_broken,
-            storage=self.storage_config,
+            storage=storage_config,
             branching=self.orion_config.branching,
             max_idle_time=None,
             heartbeat=None,
