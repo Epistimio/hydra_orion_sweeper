@@ -33,7 +33,7 @@ from orion.core.utils.exceptions import (
 )
 from orion.core.utils.flatten import flatten
 from orion.core.worker.trial import AlreadyReleased, Trial
-from orion.storage.base import setup_storage, get_storage
+from orion.storage.base import get_storage, setup_storage
 
 from .config import AlgorithmConf, OrionClientConf, StorageConf, WorkerConf
 
@@ -337,6 +337,7 @@ class OrionSweeperImpl(Sweeper):
         self.arguments = dict()
         self.pending_trials = set()
         self.client = None
+        self.storage = None
 
         self.orion_config = orion
         self.worker_config = worker
@@ -408,6 +409,16 @@ class OrionSweeperImpl(Sweeper):
 
         return trials
 
+    def _patch_database_path(self, config):
+        database = config.get("database", {})
+        dbtype = database.get("type")
+        use_hydra_path = config.pop("use_hydra_path", True)
+
+        if use_hydra_path and dbtype in ("pickleddb",):
+            database["host"] = os.path.join(self.working_directory(), database["host"])
+
+        return config
+
     def new_experiment(self, arguments) -> ExperimentClient:
         """Initialize orion client from the config and the arguments"""
 
@@ -418,12 +429,14 @@ class OrionSweeperImpl(Sweeper):
         algo_type = dict_config.pop("type", "random")
         algo_config = dict_config.pop("config", dict())
 
-        storage_config = OmegaConf.to_container(self.storage_config)
-        storage = setup_storage(storage_config) or get_storage()
+        storage_config = self._patch_database_path(
+            OmegaConf.to_container(self.storage_config)
+        )
+
+        self.storage = setup_storage(storage_config) or get_storage()
 
         logger.info("Orion Optimizer %s", self.algo_config)
         logger.info("with parametrization %s", self.space.configuration)
-        logger.info("Using Storage: %s", storage)
 
         return create_experiment(
             name=self.orion_config.name,
