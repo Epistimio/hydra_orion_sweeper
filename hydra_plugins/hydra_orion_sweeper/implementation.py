@@ -4,6 +4,8 @@ Implements a sweeper plugin for Orion.
 """
 import logging
 import os
+import re
+from collections import defaultdict
 from contextlib import contextmanager
 from copy import deepcopy
 from dataclasses import asdict
@@ -34,7 +36,9 @@ from orion.core.worker.trial import AlreadyReleased, Trial
 
 from .config import AlgorithmConf, OrionClientConf, StorageConf, WorkerConf
 
-log = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
+
+NESTED_DIM_REGEX = re.compile(r"[A-Za-z0-9]*(\.[A-Za-z0-9]*)+=.*")
 
 # pylint: disable=too-few-public-methods
 class SpaceFunction:
@@ -183,33 +187,82 @@ class SpaceParser:
         """Generate the final space after overrides that will be used for the optimization"""
         configuration = deepcopy(self.base_space)
         configuration.update(self.overrides)
-        return SpaceBuilder().build(configuration), self.arguments
+        space = SpaceBuilder().build(configuration)
+
+        return space, self.arguments
 
     def add_from_parametrization(self, parametrization: Optional[DictConfig]) -> None:
         """Use the parametrization retrieved from the configuration to generate a
         preliminary research space
 
         """
+        self._recursive_dim_builder(self.arguments, self.base_space, parametrization)
+
+    def _recursive_dim_builder(
+        self, args, dest, parametrization: Optional[DictConfig]
+    ) -> None:
         for k, v in parametrization.items():
+            if isinstance(v, (dict, DictConfig)):
+                subspace = dict()
+                subargs = dict()
+
+                args[k] = subargs
+                dest[k] = subspace
+
+                self._recursive_dim_builder(subargs, subspace, v)
+
+                if not subargs:
+                    args.pop(k)
+
+                if not subspace:
+                    dest.pop(k)
+
+                return
+
             try:
                 dim = DimensionBuilder().build(k, v)
-                self.base_space[dim.name] = dim.get_prior_string()
+                dest[dim.name] = dim.get_prior_string()
             except (TypeError, NameError):
                 # Regular argument
-                self.arguments[k] = v
+                args[k] = v
 
     def add_from_overrides(self, arguments: List[str]) -> None:
         """Create a dictionary of overrides to modify the research space"""
+
+        self._recursive_overrides(self.arguments, self.overrides, arguments)
+
+    def _recursive_overrides(self, args, overrides, arguments):
         parser = override_parser()
         parsed = parser.parse_overrides(arguments)
+
+        nested_overrides = defaultdict(list)
+        for arg in arguments:
+            if NESTED_DIM_REGEX.match(arg):
+                name, rest = arg.split(".", 1)
+                nested_overrides[name].append(rest)
+
+        for name, nestedargs in nested_overrides.items():
+            suboverrides = dict()
+            subargs = dict()
+
+            args[name] = subargs
+            overrides[name] = suboverrides
+
+            self._recursive_overrides(subargs, suboverrides, nestedargs)
+
+            if not subargs:
+                args.pop(name)
+
+            if not suboverrides:
+                overrides.pop(name)
 
         for override in parsed:
             dim = self.process_overrides(override)
 
             if dim is None:
-                self.arguments[override.get_key_element()] = override.value()
+                args[override.get_key_element()] = override.value()
             else:
-                self.overrides[dim.name] = dim.get_prior_string()
+                overrides[dim.name] = dim.get_prior_string()
 
     def process_overrides(self, override: Override) -> Dimension:
         """Identify the sweep overrides and build a matching dimension"""
@@ -255,7 +308,7 @@ class SpaceParser:
                 return DimensionBuilder().build(name, values)
             except (TypeError, NameError):
                 # Not a hyperparameter space definition
-                pass
+                logger.debug("Could not process dimension %s: %s", name, values)
 
 
 @contextmanager
@@ -313,7 +366,7 @@ class OrionSweeperImpl(Sweeper):
         self.space = None
         self.arguments = dict()
 
-        log.debug("Starting launcher")
+        logger.debug("Starting launcher")
 
         self.launcher = Plugins.instance().instantiate_launcher(
             hydra_context=hydra_context, task_function=task_function, config=config
@@ -362,8 +415,8 @@ class OrionSweeperImpl(Sweeper):
         algo_type = dict_config.pop("type", "random")
         algo_config = dict_config.pop("config", dict())
 
-        log.info("Orion Optimizer %s", self.algo_config)
-        log.info("with parametrization %s", self.space.configuration)
+        logger.info("Orion Optimizer %s", self.algo_config)
+        logger.info("with parametrization %s", self.space.configuration)
 
         return create_experiment(
             name=self.orion_config.name,
@@ -389,7 +442,7 @@ class OrionSweeperImpl(Sweeper):
         assert self.launcher is not None
         assert self.job_idx is not None
 
-        log.debug("Starting new experiment")
+        logger.debug("Starting new experiment")
         self.client = self.new_experiment(arguments)
 
         with clientctx(self.client):
@@ -420,7 +473,7 @@ class OrionSweeperImpl(Sweeper):
 
             if self.client.is_broken:
                 if len(failures) == 0:
-                    log.error(
+                    logger.error(
                         "Experiment has reached is maximum amount of broken trials"
                     )
                     break
@@ -437,7 +490,7 @@ class OrionSweeperImpl(Sweeper):
         """Sample a new batch of trials"""
 
         trials = self.suggest_trials(self.n_workers())
-        log.debug("Suggest %d new trials", len(trials))
+        logger.debug("Suggest %d new trials", len(trials))
         self.pending_trials.update(set(trials))
         return trials
 
@@ -507,6 +560,6 @@ class OrionSweeperImpl(Sweeper):
             f"{self.config.hydra.sweep.dir}/optimization_results.yaml",
         )
 
-        log.info(
+        logger.info(
             "Best parameters: %s", " ".join(f"{x}={y}" for x, y in best_params.items())
         )

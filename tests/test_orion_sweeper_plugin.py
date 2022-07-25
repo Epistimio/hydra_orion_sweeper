@@ -11,6 +11,7 @@ from hydra.test_utils.test_utils import (
     run_python_script,
 )
 from omegaconf import DictConfig, OmegaConf
+from orion.core.utils.flatten import unflatten
 from pytest import mark
 
 from hydra_plugins.hydra_orion_sweeper import implementation
@@ -34,6 +35,10 @@ parametrization = dict(
     e0="fidelity(10, 100)",
     e1="fidelity(10, 100, base=3)",
     r1=123,
+    h1=dict(
+        a0="uniform(0, 1)",
+        a02="choices([4, 6])",
+    ),
 )
 
 nevergrad_overrides = [
@@ -47,6 +52,8 @@ nevergrad_overrides = [
     # Nevergrad does not have an equivalent
     'e1="fidelity(2, 10, base=4)"',
     'c0="normal(2, 10)"',
+    "h1.a0=interval(1, 2)",
+    "h1.a02=range(4, 8, 2)",
 ]
 
 orion_overrides = [
@@ -59,6 +66,8 @@ orion_overrides = [
     'e1="fidelity(2, 10, base=4)"',
     'c0="normal(2, 10)"',
     "r1=234",
+    'h1.a0="uniform(1, 2)"',
+    'h1.a02="choices([4, 6, 8])"',
 ]
 
 overriden_parametrization = dict(
@@ -70,6 +79,10 @@ overriden_parametrization = dict(
     d0="choices(['a', 'b', 'c', 'd'])",
     e1="fidelity(2, 10, base=4)",
     c0="normal(2, 10)",
+    h1=dict(
+        a0="uniform(1, 2)",
+        a02="choices([4, 6, 8])",
+    ),
 )
 
 
@@ -88,7 +101,9 @@ def test_space_parser(overrides):
     parser.add_from_parametrization(parametrization)
 
     space, args = parser.space()
-    assert space.configuration == space_params, "Generated space match definition"
+    assert (
+        unflatten(space.configuration) == space_params
+    ), "Generated space match definition"
     assert args == dict(r1=123), "Regular argument was identified"
 
     if len(overrides) > 0:
@@ -97,8 +112,11 @@ def test_space_parser(overrides):
 
         space_params.update(overriden_parametrization)
 
+        print()
+        print(unflatten(space.configuration))
+        print(space_params)
         assert (
-            space.configuration == space_params
+            unflatten(space.configuration) == space_params
         ), "Generated space match overriden definition"
         assert args == dict(r1=234), "Regular argument was overriden"
 
@@ -171,16 +189,16 @@ def test_orion_example(
     if with_commandline:
         if with_orion_format:
             cmd += [
-                "opt='\"choices(['Adam', 'SGD'])\"'",
+                "optimizer.name='\"choices(['Adam', 'SGD'])\"'",
                 "batch_size='\"choices([4,8,12,16])\"'",
-                "lr='\"loguniform(0.001, 1.0)\"'",
+                "optimizer.lr='\"loguniform(0.001, 1.0)\"'",
                 "dropout=uniform(0,1)",
             ]
         else:
             cmd += [
-                "opt=Adam,SGD",
+                "optimizer.name=Adam,SGD",
                 "batch_size=4,8,12,16",
-                "lr=tag(log, interval(0.001, 1.0))",
+                "optimizer.lr=tag(log, interval(0.001, 1.0))",
                 "dropout=interval(0,1)",
             ]
 
