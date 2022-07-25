@@ -23,13 +23,16 @@ hydra:
 
     # default parametrization of the search space
     parametrization:
-      lr: "uniform(0, 1)"
-      opt: "choices(['Adam', 'SGD'])"
+      optimizer:
+        name: "choices(['Adam', 'SGD'])"
+        lr: "uniform(0, 1)"
       dropout: "uniform(0, 1)"
       batch_size: "uniform(4, 16, discrete=True)"
 
-opt: Adam
-lr: 0.01
+optimizer:
+  name: 'Adam'
+  lr: 0.01
+
 dropout: 0.6
 batch_size: 8
 

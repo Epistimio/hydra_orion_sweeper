@@ -15,10 +15,10 @@ def dummy_training(cfg: DictConfig) -> float:
     do = cfg.dropout
     bs = cfg.batch_size
     out = float(
-        abs(do - 0.33) + int(cfg.opt == "Adam") + abs(cfg.lr - 0.12) + abs(bs - 4)
+        abs(do - 0.33) + int(cfg.optimizer.name == "Adam") + abs(cfg.optimizer.lr - 0.12) + abs(bs - 4)
     )
     log.info(
-        f"dummy_training(dropout={do:.3f}, lr={cfg.lr:.3f}, opt={cfg.opt}, batch_size={bs}) = {out:.3f}",
+        f"dummy_training(dropout={do:.3f}, lr={cfg.optimizer.lr:.3f}, opt={cfg.optimizer.name}, batch_size={bs}) = {out:.3f}",
     )
     if cfg.error:
         raise RuntimeError("cfg.error is True")
