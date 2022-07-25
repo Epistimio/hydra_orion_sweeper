@@ -443,6 +443,7 @@ class OrionSweeperImpl(Sweeper):
             version=self.orion_config.version,
             space=self.space,
             algorithms={algo_type: algo_config},
+            working_dir=self.working_directory(),
             strategy=None,
             max_trials=self.worker_config.max_trials,
             max_broken=self.worker_config.max_broken,
