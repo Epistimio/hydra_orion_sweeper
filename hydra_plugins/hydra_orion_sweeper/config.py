@@ -32,11 +32,23 @@ class WorkerConf:
 
 
 @dataclass
+class Database:
+    """Orion database configuration"""
+
+    type: str = "pickleddb"
+    host: str = "orion_database.pkl"
+
+
+@dataclass
 class StorageConf:
     """Orion storage configuration"""
 
-    type: str = "pickledb"
-    host: str = "orion_database.pkl"
+    type: str = "legacy"
+    database: Database = Database()
+
+    # if true filesystem based databases will use hydra working dir as base path
+    # if you want a single database for all your run you should set this to false
+    use_hydra_path: bool = True
 
 
 @dataclass
