@@ -14,6 +14,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -72,19 +73,19 @@
            <div itemprop="articleBody">
              
   <section id="hydra-sweeper-plugin-for-orion">
-<h1>Hydra Sweeper plugin for Orion<a class="headerlink" href="#hydra-sweeper-plugin-for-orion" title="Permalink to this headline"></a></h1>
+<h1>Hydra Sweeper plugin for Orion<a class="headerlink" href="#hydra-sweeper-plugin-for-orion" title="Permalink to this heading"></a></h1>
 <p><a class="reference external" href="https://pypi.python.org/pypi/hydra-orion-sweeper"><img alt="Current PyPi Version" src="https://img.shields.io/pypi/v/hydra-orion-sweeper.svg" /></a> <a class="reference external" href="https://pypi.python.org/pypi/hydra-orion-sweeper"><img alt="Supported Python Versions" src="https://img.shields.io/pypi/pyversions/hydra-orion-sweeper.svg" /></a> <a class="reference external" href="https://codecov.io/gh/Epistimio/hydra_orion_sweeper"><img alt="codecov" src="https://codecov.io/gh/Epistimio/hydra_orion_sweeper/branch/master/graph/badge.svg?token=40Cr8V87HI" /></a> <a class="reference external" href="https://epistimio.github.io/hydra_orion_sweeper/"><img alt="docs" src="https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/docs.yml/badge.svg?branch=master" /></a> <a class="reference external" href="https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/test.yml"><img alt="tests" src="https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/test.yml/badge.svg?branch=master" /></a> <a class="reference external" href="https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/style.yml"><img alt="style" src="https://github.com/Epistimio/hydra_orion_sweeper/actions/workflows/style.yml/badge.svg?branch=master" /></a></p>
 <p>Provides a mechanism for Hydra applications to use Orion
 algorithms for the optimization of the parameters of any experiment.</p>
 <p>See <a class="reference external" href="https://orion.readthedocs.io">website</a> for more information</p>
 <section id="install">
-<h2>Install<a class="headerlink" href="#install" title="Permalink to this headline"></a></h2>
+<h2>Install<a class="headerlink" href="#install" title="Permalink to this heading"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install hydra-orion-sweeper
 </pre></div>
 </div>
 </section>
 <section id="search-space">
-<h2>Search Space<a class="headerlink" href="#search-space" title="Permalink to this headline"></a></h2>
+<h2>Search Space<a class="headerlink" href="#search-space" title="Permalink to this heading"></a></h2>
 <p>Orion defines 5 different dimensions that can be used to define your search space.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">uniform(low,</span> <span class="pre">high,</span> <span class="pre">[discrete=False,</span> <span class="pre">precision=4,</span> <span class="pre">shape=None,</span> <span class="pre">default_value=None])</span></code></p></li>
@@ -96,7 +97,7 @@ algorithms for the optimization of the parameters of any experiment.</p>
 <p>Fidelity is a special dimension that is used to represent the training time, you can think of it as the <code class="docutils literal notranslate"><span class="pre">epoch</span></code> dimension.</p>
 </section>
 <section id="documentation">
-<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline"></a></h2>
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h2>
 <p>For in-depth documentation about the plugin and its configuration options
 you should refer to <a class="reference external" href="https://orion.readthedocs.io/en/stable/index.html">Orion</a> as the plugin
 configurations are simply passed through.</p>
@@ -108,7 +109,7 @@ configurations are simply passed through.</p>
 </ul>
 </section>
 <section id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">defaults</span><span class="p">:</span>
 <span class="o">-</span> <span class="n">override</span> <span class="n">hydra</span><span class="o">/</span><span class="n">sweeper</span><span class="p">:</span> <span class="n">orion</span>
 
