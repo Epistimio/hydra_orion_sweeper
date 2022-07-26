@@ -28,17 +28,28 @@ parametrization = dict(
     b0="loguniform(1, 2)",
     b1="loguniform(1, 2, discrete=True)",
     b2="loguniform(1, 2, precision=2)",
-    c0="normal(0, 1)",
-    c1="normal(0, 1, discrete=True)",
-    c2="normal(0, 1, precision=True)",
-    d0="choices(['a', 'b'])",
-    e0="fidelity(10, 100)",
-    e1="fidelity(10, 100, base=3)",
     r1=123,
     h1=dict(
         a0="uniform(0, 1)",
         a02="choices([4, 6])",
     ),
+    h2=dict(
+        r1=123,
+    ),
+    c0="normal(0, 1)",
+    c1="normal(0, 1, discrete=True)",
+    c2="normal(0, 1, precision=True)",
+    d0="choices(['a', 'b'])",
+    e0="fidelity(10, 100)",
+    h3=dict(
+        h33=dict(
+            h333=dict(
+                a0="uniform(0, 1)",
+                a01="uniform(3, 4, discrete=True)",
+            ),
+        ),
+    ),
+    e1="fidelity(10, 100, base=3)",
 )
 
 nevergrad_overrides = [
@@ -54,6 +65,7 @@ nevergrad_overrides = [
     'c0="normal(2, 10)"',
     "h1.a0=interval(1, 2)",
     "h1.a02=range(4, 8, 2)",
+    "h2.r1=234",
 ]
 
 orion_overrides = [
@@ -68,6 +80,7 @@ orion_overrides = [
     "r1=234",
     'h1.a0="uniform(1, 2)"',
     'h1.a02="choices([4, 6, 8])"',
+    "h2.r1=234",
 ]
 
 overriden_parametrization = dict(
@@ -96,6 +109,7 @@ def test_discovery() -> None:
 def test_space_parser(overrides):
     space_params = deepcopy(parametrization)
     space_params.pop("r1")
+    space_params.pop("h2")
 
     parser = implementation.SpaceParser()
     parser.add_from_parametrization(parametrization)
@@ -104,7 +118,7 @@ def test_space_parser(overrides):
     assert (
         unflatten(space.configuration) == space_params
     ), "Generated space match definition"
-    assert args == dict(r1=123), "Regular argument was identified"
+    assert args == dict(r1=123, h2=dict(r1=123)), "Regular arguments were identified"
 
     if len(overrides) > 0:
         parser.add_from_overrides(overrides)
@@ -118,7 +132,7 @@ def test_space_parser(overrides):
         assert (
             unflatten(space.configuration) == space_params
         ), "Generated space match overriden definition"
-        assert args == dict(r1=234), "Regular argument was overriden"
+        assert args == dict(r1=234, h2=dict(r1=234)), "Regular arguments were overriden"
 
 
 orion_functions_overrides = [
