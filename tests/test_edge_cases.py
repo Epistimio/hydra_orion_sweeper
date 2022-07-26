@@ -69,7 +69,7 @@ def test_no_warnings_with_params(recwarn):
 # <<< Remove with Issue #8
 
 
-choices_formats = [[4, 6, 8], ["a", "b", "c", "d"]]
+choices_formats = [[4, 6, 8], ["a", "b", "c", "d"], dict(a=0.25, b=0.75)]
 
 
 @pytest.mark.parametrize("options", choices_formats)

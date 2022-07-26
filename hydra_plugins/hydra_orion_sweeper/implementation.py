@@ -200,25 +200,22 @@ class SpaceParser:
         self._recursive_dim_builder(self.arguments, self.base_space, parametrization)
 
     def _recursive_dim_builder(
-        self, args, dest, parametrization: Optional[DictConfig]
+        self, args, dest, parametrization: Optional[DictConfig], depth: int = 0
     ) -> None:
         for k, v in parametrization.items():
             if isinstance(v, (dict, DictConfig)):
                 subspace = dict()
                 subargs = dict()
 
-                args[k] = subargs
-                dest[k] = subspace
+                self._recursive_dim_builder(subargs, subspace, v, depth + 1)
 
-                self._recursive_dim_builder(subargs, subspace, v)
+                if subargs:
+                    args[k] = subargs
 
-                if not subargs:
-                    args.pop(k)
+                if subspace:
+                    dest[k] = subspace
 
-                if not subspace:
-                    dest.pop(k)
-
-                return
+                continue
 
             try:
                 dim = DimensionBuilder().build(k, v)
@@ -233,29 +230,29 @@ class SpaceParser:
         self._recursive_overrides(self.arguments, self.overrides, arguments)
 
     def _recursive_overrides(self, args, overrides, arguments):
-        parser = override_parser()
-        parsed = parser.parse_overrides(arguments)
-
+        regular_args = []
         nested_overrides = defaultdict(list)
         for arg in arguments:
             if NESTED_DIM_REGEX.match(arg):
                 name, rest = arg.split(".", 1)
                 nested_overrides[name].append(rest)
+            else:
+                regular_args.append(arg)
+
+        parser = override_parser()
+        parsed = parser.parse_overrides(regular_args)
 
         for name, nestedargs in nested_overrides.items():
             suboverrides = dict()
             subargs = dict()
 
-            args[name] = subargs
-            overrides[name] = suboverrides
-
             self._recursive_overrides(subargs, suboverrides, nestedargs)
 
-            if not subargs:
-                args.pop(name)
+            if subargs:
+                args[name] = subargs
 
-            if not suboverrides:
-                overrides.pop(name)
+            if suboverrides:
+                overrides[name] = suboverrides
 
         for override in parsed:
             dim = self.process_overrides(override)
