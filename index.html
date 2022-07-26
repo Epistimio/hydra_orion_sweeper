@@ -130,8 +130,10 @@ configurations are simply passed through.</p>
       <span class="n">max_trials</span><span class="p">:</span> <span class="mi">100</span>
 
    <span class="n">storage</span><span class="p">:</span>
-      <span class="nb">type</span><span class="p">:</span> <span class="n">pickledb</span>
-      <span class="n">host</span><span class="p">:</span> <span class="s1">&#39;database.pkl&#39;</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="n">legacy</span>
+      <span class="n">database</span><span class="p">:</span>
+         <span class="nb">type</span><span class="p">:</span> <span class="n">pickleddb</span>
+         <span class="n">host</span><span class="p">:</span> <span class="s1">&#39;database.pkl&#39;</span>
 
    <span class="c1"># default parametrization of the search space</span>
    <span class="n">parametrization</span><span class="p">:</span>
