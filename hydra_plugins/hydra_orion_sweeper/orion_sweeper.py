@@ -27,6 +27,7 @@ class OrionSweeper(Sweeper):
     ):
         from .implementation import OrionSweeperImpl
 
+        # >>> Remove with Issue #8
         if parametrization is not None and params is None:
             warn(
                 "`hydra.sweeper.orion.parametrization` is deprecated;"
@@ -35,12 +36,16 @@ class OrionSweeper(Sweeper):
             )
             params = parametrization
 
-        if parametrization is not None and params is not None:
+        elif parametrization is not None and params is not None:
             warn(
                 "Both `hydra.sweeper.orion.parametrization` and `hydra.sweeper.params` are defined;"
                 "using `hydra.sweeper.params`",
                 DeprecationWarning,
             )
+        # <<<
+
+        if params is None:
+            params = dict()
 
         self.sweeper = OrionSweeperImpl(orion, worker, algorithm, storage, params)
 

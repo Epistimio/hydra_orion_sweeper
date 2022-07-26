@@ -90,7 +90,7 @@ class OrionSweeperConf:
 
     # Search space (Optuna & default)
     # See `Search Space <https://orion.readthedocs.io/en/stable/user/searchspace.html>`_
-    params: Dict[str, Any] = field(default_factory=dict)
+    params: Optional[Dict[str, Any]] = None
 
     # Note: Ax space is configured as hydra.sweeper.ax.ax_config.params
     # which is a bit too convoluted for us to support
