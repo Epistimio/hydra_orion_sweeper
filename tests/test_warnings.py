@@ -1,10 +1,5 @@
 import pytest
 
-from hydra_plugins.hydra_orion_sweeper.implementation import (
-    InvalidResult,
-    choices,
-    to_objective,
-)
 from hydra_plugins.hydra_orion_sweeper.orion_sweeper import (
     AlgorithmConf,
     OrionClientConf,
@@ -67,32 +62,3 @@ def test_no_warnings_with_params(recwarn):
 
 
 # <<< Remove with Issue #8
-
-
-choices_formats = [[4, 6, 8], ["a", "b", "c", "d"], dict(a=0.25, b=0.75)]
-
-
-@pytest.mark.parametrize("options", choices_formats)
-def test_choices(options):
-
-    dim = choices(options)("dimname")
-
-    assert dim.get_prior_string() == f"choices({options})"
-
-
-value_formats = [
-    123,
-    dict(name="objective", type="objective", value=123),
-    [dict(name="objective", type="objective", value=123)],
-]
-
-
-@pytest.mark.parametrize("value", value_formats)
-def test_to_objective(value):
-    value = to_objective(value)
-    assert value == [dict(name="objective", type="objective", value=123)]
-
-
-def test_bad_objective_value():
-    with pytest.raises(InvalidResult):
-        to_objective("not a numberic value")
