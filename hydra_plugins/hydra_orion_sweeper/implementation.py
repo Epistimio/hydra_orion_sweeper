@@ -141,6 +141,11 @@ def choices(options) -> SpaceFunction:
     return SpaceFunction(dim)
 
 
+def override_dict(**kwargs):
+    """Simple dictionary function"""
+    return kwargs
+
+
 def override_parser():
     """Create an override parser with Orion's functions"""
     parser = OverridesParser.create()
@@ -149,6 +154,7 @@ def override_parser():
     parser.functions.register(name="normal", func=normal)
     parser.functions.register(name="choices", func=choices)
     parser.functions.register(name="fidelity", func=fidelity)
+    parser.functions.register(name="dict", func=override_dict)
     return parser
 
 
@@ -273,7 +279,7 @@ class SpaceParser:
             return builder
 
         if isinstance(values, SpaceFunction):
-            return override(name)
+            return values(name)
 
         elif override.is_choice_sweep():
             return build_dim(name).choices(*values.list)
@@ -493,7 +499,7 @@ class OrionSweeperImpl(Sweeper):
                     logger.error(
                         "Experiment has reached is maximum amount of broken trials"
                     )
-                    break
+                    raise BrokenExperiment("Max broken trials reached, stopping")
 
                 # make the `Future` raise the exception it received
                 try:

@@ -147,6 +147,15 @@ orion_functions_overrides = [
 ]
 
 
+def maybe_remove_previous_run():
+    import shutil
+
+    try:
+        shutil.rmtree("None")
+    except:
+        pass
+
+
 def test_override_parser():
     parser = implementation.override_parser()
     parsed = parser.parse_overrides(orion_functions_overrides)
