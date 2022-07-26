@@ -331,7 +331,7 @@ class OrionSweeperImpl(Sweeper):
         worker: WorkerConf,
         algorithm: AlgorithmConf,
         storage: StorageConf,
-        parametrization: Optional[DictConfig],
+        params: Optional[DictConfig],
     ):
         self.space = None
         self.arguments = dict()
@@ -350,7 +350,7 @@ class OrionSweeperImpl(Sweeper):
         self.job_idx: Optional[int] = None
 
         self.space_parser = SpaceParser()
-        self.space_parser.add_from_parametrization(parametrization)
+        self.space_parser.add_from_parametrization(params)
 
     def setup(
         self,

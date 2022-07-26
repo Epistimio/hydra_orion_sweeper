@@ -6,11 +6,11 @@ Hydra Sweeper plugin for Orion
 .. |pypi| image:: https://img.shields.io/pypi/v/hydra-orion-sweeper.svg
     :target: https://pypi.python.org/pypi/hydra-orion-sweeper
     :alt: Current PyPi Version
-  
+
 .. |py_versions| image:: https://img.shields.io/pypi/pyversions/hydra-orion-sweeper.svg
     :target: https://pypi.python.org/pypi/hydra-orion-sweeper
     :alt: Supported Python Versions
-  
+
 .. |codecov| image:: https://codecov.io/gh/Epistimio/hydra_orion_sweeper/branch/master/graph/badge.svg?token=40Cr8V87HI
    :target: https://codecov.io/gh/Epistimio/hydra_orion_sweeper
 
@@ -74,6 +74,10 @@ Example
 
    hydra:
    sweeper:
+      params:
+         a: "uniform(0, 1)"
+         b: "uniform(0, 1)"
+
       orion:
          name: 'experiment'
          version: '1'
@@ -93,11 +97,6 @@ Example
          database:
             type: pickleddb
             host: 'database.pkl'
-
-      # default parametrization of the search space
-      parametrization:
-         a: "uniform(0, 1)"
-         b: "uniform(0, 1)"
 
    # Default values
    a: 0

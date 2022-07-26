@@ -21,7 +21,10 @@ class OrionClientConf:
 
 @dataclass
 class WorkerConf:
-    """Orion Worker configuration"""
+    """Orion Worker configuration
+
+    See `worker <https://orion.readthedocs.io/en/stable/user/config.html#worker>`_
+    """
 
     n_workers: int = 1
     pool_size: Optional[int] = None
@@ -33,7 +36,10 @@ class WorkerConf:
 
 @dataclass
 class Database:
-    """Orion database configuration"""
+    """Orion database configuration
+
+    See `Database <https://orion.readthedocs.io/en/stable/user/config.html#database>`_
+    """
 
     type: str = "pickleddb"
     host: str = "orion_database.pkl"
@@ -41,7 +47,10 @@ class Database:
 
 @dataclass
 class StorageConf:
-    """Orion storage configuration"""
+    """Orion storage configuration
+
+    See `storage <https://orion.readthedocs.io/en/stable/user/storage.html>`_
+    """
 
     type: str = "legacy"
     database: Database = Database()
@@ -53,7 +62,10 @@ class StorageConf:
 
 @dataclass
 class AlgorithmConf:
-    """Orion optimization algorithm configuration"""
+    """Orion optimization algorithm configuration
+
+    See `algorithms <https://orion.readthedocs.io/en/stable/user/algorithms.html>`_
+    """
 
     type: str = "random"
     config: Dict[str, Any] = field(default_factory=dict)
@@ -73,8 +85,15 @@ class OrionSweeperConf:
 
     storage: StorageConf = StorageConf()
 
-    # default parametrization of the search space
-    parametrization: Dict[str, Any] = field(default_factory=dict)
+    # deprecated, use params instead
+    parametrization: Optional[Dict[str, Any]] = None
+
+    # Search space (Optuna & default)
+    # See `Search Space <https://orion.readthedocs.io/en/stable/user/searchspace.html>`_
+    params: Optional[Dict[str, Any]] = None
+
+    # Note: Ax space is configured as hydra.sweeper.ax.ax_config.params
+    # which is a bit too convoluted for us to support
 
 
 ConfigStore.instance().store(
