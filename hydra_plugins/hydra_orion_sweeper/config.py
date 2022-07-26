@@ -73,8 +73,14 @@ class OrionSweeperConf:
 
     storage: StorageConf = StorageConf()
 
-    # default parametrization of the search space
-    parametrization: Dict[str, Any] = field(default_factory=dict)
+    # deprecated, (Nevergrad like)
+    parametrization: Optional[Dict[str, Any]] = None
+
+    # Search space (Optuna & default)
+    params: Dict[str, Any] = field(default_factory=dict)
+
+    # Note: Ax space is configured as hydra.sweeper.ax.ax_config.params
+    # which is a bit too convoluted for us to support
 
 
 ConfigStore.instance().store(

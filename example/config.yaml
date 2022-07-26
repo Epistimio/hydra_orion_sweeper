@@ -3,6 +3,14 @@ defaults:
 
 hydra:
   sweeper:
+    # default parametrization of the search space
+    params:
+      optimizer:
+        name: "choices(['Adam', 'SGD'])"
+        lr: "uniform(0, 1)"
+      dropout: "uniform(0, 1)"
+      batch_size: "uniform(4, 16, discrete=True)"
+
     orion:
       name: 'experiment'
       version: '1'
@@ -23,14 +31,6 @@ hydra:
       database:
         type: pickleddb
         host: 'database.pkl'
-
-    # default parametrization of the search space
-    parametrization:
-      optimizer:
-        name: "choices(['Adam', 'SGD'])"
-        lr: "uniform(0, 1)"
-      dropout: "uniform(0, 1)"
-      batch_size: "uniform(4, 16, discrete=True)"
 
 optimizer:
   name: 'Adam'
