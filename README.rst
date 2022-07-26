@@ -89,8 +89,10 @@ Example
          max_trials: 100
 
       storage:
-         type: pickledb
-         host: 'database.pkl'
+         type: legacy
+         database:
+            type: pickleddb
+            host: 'database.pkl'
 
       # default parametrization of the search space
       parametrization:
