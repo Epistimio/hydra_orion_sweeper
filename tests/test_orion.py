@@ -46,7 +46,6 @@ def orion_configuration():
         worker=OmegaConf.structured(WorkerConf()),
         algorithm=OmegaConf.structured(AlgorithmConf()),
         storage=OmegaConf.structured(StorageConf()),
-        parametrization=None,
         params=dict(a="uniform(0, 1)"),
     )
 
