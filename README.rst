@@ -119,3 +119,6 @@ Example
    if __name__ == "__main__":
       main()
 
+.. code-block:: python
+
+   python my_app.py -m
