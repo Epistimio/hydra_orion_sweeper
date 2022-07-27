@@ -3,7 +3,6 @@
 Implements a sweeper plugin for Orion
 """
 from typing import List, Optional
-from warnings import warn
 
 from hydra import TaskFunction
 from hydra.plugins.sweeper import Sweeper
@@ -22,27 +21,9 @@ class OrionSweeper(Sweeper):
         worker: WorkerConf,
         algorithm: AlgorithmConf,
         storage: StorageConf,
-        parametrization: Optional[DictConfig],
         params: Optional[DictConfig],
     ):
         from .implementation import OrionSweeperImpl
-
-        # >>> Remove with Issue #8
-        if parametrization is not None and params is None:
-            warn(
-                "`hydra.sweeper.orion.parametrization` is deprecated;"
-                "use `hydra.sweeper.params` instead",
-                DeprecationWarning,
-            )
-            params = parametrization
-
-        elif parametrization is not None and params is not None:
-            warn(
-                "Both `hydra.sweeper.orion.parametrization` and `hydra.sweeper.params` are defined;"
-                "using `hydra.sweeper.params`",
-                DeprecationWarning,
-            )
-        # <<<
 
         if params is None:
             params = dict()
