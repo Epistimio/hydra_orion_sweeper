@@ -114,30 +114,30 @@ configurations are simply passed through.</p>
 <span class="o">-</span> <span class="n">override</span> <span class="n">hydra</span><span class="o">/</span><span class="n">sweeper</span><span class="p">:</span> <span class="n">orion</span>
 
 <span class="n">hydra</span><span class="p">:</span>
-<span class="n">sweeper</span><span class="p">:</span>
-   <span class="n">params</span><span class="p">:</span>
-      <span class="n">a</span><span class="p">:</span> <span class="s2">&quot;uniform(0, 1)&quot;</span>
-      <span class="n">b</span><span class="p">:</span> <span class="s2">&quot;uniform(0, 1)&quot;</span>
+    <span class="n">sweeper</span><span class="p">:</span>
+       <span class="n">params</span><span class="p">:</span>
+          <span class="n">a</span><span class="p">:</span> <span class="s2">&quot;uniform(0, 1)&quot;</span>
+          <span class="n">b</span><span class="p">:</span> <span class="s2">&quot;uniform(0, 1)&quot;</span>
 
-   <span class="n">orion</span><span class="p">:</span>
-      <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;experiment&#39;</span>
-      <span class="n">version</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span>
+       <span class="n">orion</span><span class="p">:</span>
+          <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;experiment&#39;</span>
+          <span class="n">version</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span>
 
-   <span class="n">algorithm</span><span class="p">:</span>
-      <span class="nb">type</span><span class="p">:</span> <span class="n">random</span>
-      <span class="n">config</span><span class="p">:</span>
-      <span class="n">seed</span><span class="p">:</span> <span class="mi">1</span>
+       <span class="n">algorithm</span><span class="p">:</span>
+          <span class="nb">type</span><span class="p">:</span> <span class="n">random</span>
+          <span class="n">config</span><span class="p">:</span>
+             <span class="n">seed</span><span class="p">:</span> <span class="mi">1</span>
 
-   <span class="n">worker</span><span class="p">:</span>
-      <span class="n">n_workers</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
-      <span class="n">max_broken</span><span class="p">:</span> <span class="mi">3</span>
-      <span class="n">max_trials</span><span class="p">:</span> <span class="mi">100</span>
+       <span class="n">worker</span><span class="p">:</span>
+          <span class="n">n_workers</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+          <span class="n">max_broken</span><span class="p">:</span> <span class="mi">3</span>
+          <span class="n">max_trials</span><span class="p">:</span> <span class="mi">100</span>
 
-   <span class="n">storage</span><span class="p">:</span>
-      <span class="nb">type</span><span class="p">:</span> <span class="n">legacy</span>
-      <span class="n">database</span><span class="p">:</span>
-         <span class="nb">type</span><span class="p">:</span> <span class="n">pickleddb</span>
-         <span class="n">host</span><span class="p">:</span> <span class="s1">&#39;database.pkl&#39;</span>
+       <span class="n">storage</span><span class="p">:</span>
+          <span class="nb">type</span><span class="p">:</span> <span class="n">legacy</span>
+          <span class="n">database</span><span class="p">:</span>
+             <span class="nb">type</span><span class="p">:</span> <span class="n">pickleddb</span>
+             <span class="n">host</span><span class="p">:</span> <span class="s1">&#39;database.pkl&#39;</span>
 
 <span class="c1"># Default values</span>
 <span class="n">a</span><span class="p">:</span> <span class="mi">0</span>
