@@ -73,30 +73,30 @@ Example
    - override hydra/sweeper: orion
 
    hydra:
-   sweeper:
-      params:
-         a: "uniform(0, 1)"
-         b: "uniform(0, 1)"
+       sweeper:
+          params:
+             a: "uniform(0, 1)"
+             b: "uniform(0, 1)"
 
-      orion:
-         name: 'experiment'
-         version: '1'
+          orion:
+             name: 'experiment'
+             version: '1'
 
-      algorithm:
-         type: random
-         config:
-         seed: 1
+          algorithm:
+             type: random
+             config:
+                seed: 1
 
-      worker:
-         n_workers: -1
-         max_broken: 3
-         max_trials: 100
+          worker:
+             n_workers: -1
+             max_broken: 3
+             max_trials: 100
 
-      storage:
-         type: legacy
-         database:
-            type: pickleddb
-            host: 'database.pkl'
+          storage:
+             type: legacy
+             database:
+                type: pickleddb
+                host: 'database.pkl'
 
    # Default values
    a: 0
