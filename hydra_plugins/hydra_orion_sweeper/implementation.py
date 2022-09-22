@@ -33,7 +33,7 @@ from orion.core.utils.exceptions import (
 )
 from orion.core.utils.flatten import flatten
 from orion.core.worker.trial import AlreadyReleased, Trial
-from orion.storage.base import get_storage, setup_storage
+from orion.storage.base import setup_storage
 
 from .config import AlgorithmConf, OrionClientConf, StorageConf, WorkerConf
 
@@ -436,7 +436,7 @@ class OrionSweeperImpl(Sweeper):
             OmegaConf.to_container(self.storage_config)
         )
 
-        self.storage = setup_storage(storage_config) or get_storage()
+        self.storage = setup_storage(storage_config)
 
         logger.info("Orion Optimizer %s", self.algo_config)
         logger.info("with parametrization %s", self.space.configuration)
