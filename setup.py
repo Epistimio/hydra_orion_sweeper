@@ -30,6 +30,7 @@ setup(
         'setuptools',
     ],
     install_requires=[
+        'typing_extensions',
         "hydra-core>=1.2",
         "orion>=0.2.2",
     ],

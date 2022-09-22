@@ -7,3 +7,5 @@ exclude .pylintrc
 prune docs
 prune example
 prune tests
+prune README.rst
+
