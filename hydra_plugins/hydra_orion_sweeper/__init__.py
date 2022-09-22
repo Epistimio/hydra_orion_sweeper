@@ -1,5 +1,5 @@
 """Plugin metadata"""
-__version__ = "1.2.1"
+__version__ = "1.3.0"
 __descr__ = "Hydra Sweeper Plugin for Orion"
 __license__ = "BSD-3-Clause"
 __author__ = "Epistímio"
