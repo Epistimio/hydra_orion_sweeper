@@ -503,9 +503,15 @@ class OrionSweeperImpl(Sweeper):
 
                 # make the `Future` raise the exception it received
                 try:
-                    failures[-1].return_value
+                    exception = failures[-1].return_value
+                    raise exception
+
                 except Exception as e:
                     raise BrokenExperiment("Max broken trials reached, stopping") from e
+
+            if len(failures) > 0:
+                for failure in failures:
+                    logger.error("Exception was received %s", failure.return_value)
 
         self.show_results()
 
