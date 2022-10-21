@@ -67,6 +67,9 @@ configurations are simply passed through.
 Example
 -------
 
+Configuration
+^^^^^^^^^^^^^
+
 .. code-block:: python
 
    defaults:
@@ -103,6 +106,9 @@ Example
    b: 0
 
 
+Python
+^^^^^^
+
 .. code-block:: python
 
    import hydra
@@ -119,6 +125,26 @@ Example
    if __name__ == "__main__":
       main()
 
+
+
+Running
+^^^^^^^
+
+To run the hyper parameter optimization process you need to specify the ``--multirun`` argument.
+
 .. code-block:: python
 
-   python my_app.py -m
+   python my_app.py --multirun
+
+
+The search space can also be tweaked from the command line
+
+
+.. code-block:: python
+
+   python my_app.py --multirun batch_size=4,8,12,16 optimizer.name=Adam,SGD 'optimizer.lr="loguniform(0.001, 1.0)"'
+
+
+.. note::
+
+   When specifying overrides you need to be careful with your bash/zsh/fish environment and escape the arguments correctly.
