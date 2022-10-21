@@ -106,6 +106,14 @@ Configuration
    b: 0
 
 
+.. note::
+
+   If the orion database path is relative; orion will create one database per multirun,
+   this is because hydra is in charge of the working directory, and hydra creates a new directory per run.
+
+   To share a database between multiruns you can use an absolute path.
+
+
 Code
 ^^^^
 
