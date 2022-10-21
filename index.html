@@ -201,6 +201,12 @@ configurations are simply passed through.</p>
 <span class="n">b</span><span class="p">:</span> <span class="mi">0</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the orion database path is relative; orion will create one database per multirun,
+this is because hydra is in charge of the working directory, and hydra creates a new directory per run.</p>
+<p>To share a database between multiruns you can use an absolute path.</p>
+</div>
 </section>
 <section id="code">
 <h3>Code<a class="headerlink" href="#code" title="Permalink to this heading"></a></h3>
