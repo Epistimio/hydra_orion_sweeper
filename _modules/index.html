@@ -15,6 +15,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -40,8 +41,62 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../api.html">Orion Sweeper</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api.html#module-hydra_orion_sweeper.config">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">Orion Sweeper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#hydra_orion_sweeper.orion_sweeper.OrionSweeper"><code class="docutils literal notranslate"><span class="pre">OrionSweeper</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.orion_sweeper.OrionSweeper.config"><code class="docutils literal notranslate"><span class="pre">OrionSweeper.config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.orion_sweeper.OrionSweeper.hydra_context"><code class="docutils literal notranslate"><span class="pre">OrionSweeper.hydra_context</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.orion_sweeper.OrionSweeper.launcher"><code class="docutils literal notranslate"><span class="pre">OrionSweeper.launcher</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.orion_sweeper.OrionSweeper.setup"><code class="docutils literal notranslate"><span class="pre">OrionSweeper.setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.orion_sweeper.OrionSweeper.sweep"><code class="docutils literal notranslate"><span class="pre">OrionSweeper.sweep()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html#module-hydra_orion_sweeper.config">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.AlgorithmConf"><code class="docutils literal notranslate"><span class="pre">AlgorithmConf</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.AlgorithmConf.config"><code class="docutils literal notranslate"><span class="pre">AlgorithmConf.config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.AlgorithmConf.type"><code class="docutils literal notranslate"><span class="pre">AlgorithmConf.type</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.Database"><code class="docutils literal notranslate"><span class="pre">Database</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.Database.host"><code class="docutils literal notranslate"><span class="pre">Database.host</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.Database.type"><code class="docutils literal notranslate"><span class="pre">Database.type</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.OrionClientConf"><code class="docutils literal notranslate"><span class="pre">OrionClientConf</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.OrionClientConf.branching"><code class="docutils literal notranslate"><span class="pre">OrionClientConf.branching</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.OrionClientConf.debug"><code class="docutils literal notranslate"><span class="pre">OrionClientConf.debug</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.OrionClientConf.name"><code class="docutils literal notranslate"><span class="pre">OrionClientConf.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.OrionClientConf.version"><code class="docutils literal notranslate"><span class="pre">OrionClientConf.version</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.OrionClientConf.workspace"><code class="docutils literal notranslate"><span class="pre">OrionClientConf.workspace</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.OrionSweeperConf"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.OrionSweeperConf.algorithm"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.algorithm</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.OrionSweeperConf.orion"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.orion</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.OrionSweeperConf.parametrization"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.parametrization</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.OrionSweeperConf.params"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.params</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.OrionSweeperConf.storage"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.storage</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.OrionSweeperConf.worker"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.worker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.StorageConf"><code class="docutils literal notranslate"><span class="pre">StorageConf</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.StorageConf.database"><code class="docutils literal notranslate"><span class="pre">StorageConf.database</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.StorageConf.type"><code class="docutils literal notranslate"><span class="pre">StorageConf.type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.StorageConf.use_hydra_path"><code class="docutils literal notranslate"><span class="pre">StorageConf.use_hydra_path</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.WorkerConf"><code class="docutils literal notranslate"><span class="pre">WorkerConf</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.WorkerConf.max_broken"><code class="docutils literal notranslate"><span class="pre">WorkerConf.max_broken</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.WorkerConf.max_trials"><code class="docutils literal notranslate"><span class="pre">WorkerConf.max_trials</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.WorkerConf.max_trials_per_worker"><code class="docutils literal notranslate"><span class="pre">WorkerConf.max_trials_per_worker</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.WorkerConf.n_workers"><code class="docutils literal notranslate"><span class="pre">WorkerConf.n_workers</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.WorkerConf.pool_size"><code class="docutils literal notranslate"><span class="pre">WorkerConf.pool_size</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#hydra_orion_sweeper.config.WorkerConf.reservation_timeout"><code class="docutils literal notranslate"><span class="pre">WorkerConf.reservation_timeout</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
         </div>
