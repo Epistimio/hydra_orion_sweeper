@@ -13,9 +13,9 @@ class OrionClientConf:
     """Orion EVC options"""
 
     name: Optional[str] = None
-    version: Optional[str] = None
+    version: Optional[int] = None
     branching: Optional[str] = None
-    debug: Optional[str] = False
+    debug: Optional[bool] = False
     workspace: Optional[str] = None
 
 
