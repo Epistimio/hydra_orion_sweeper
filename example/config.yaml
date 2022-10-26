@@ -10,13 +10,14 @@ hydra:
         lr: "uniform(0, 1)"
       dropout: "uniform(0, 1)"
       batch_size: "uniform(4, 16, discrete=True)"
+      epoch: "fidelity(10, 100)"
 
     orion:
       name: 'experiment'
       version: '1'
 
     algorithm:
-      type: random
+      type: pb2
       config:
         seed: 1
 
@@ -36,6 +37,7 @@ optimizer:
   name: 'Adam'
   lr: 0.01
 
+epoch: 100
 dropout: 0.6
 batch_size: 8
 
