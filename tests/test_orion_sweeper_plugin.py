@@ -17,6 +17,7 @@ from pytest import mark
 from hydra_plugins.hydra_orion_sweeper import implementation
 from hydra_plugins.hydra_orion_sweeper.orion_sweeper import OrionSweeper
 
+
 chdir_plugin_root()
 
 parametrization = dict(
@@ -225,7 +226,7 @@ def test_orion_example(
                 "dropout=interval(0,1)",
             ]
 
-    run_python_script(cmd)
+    run_python_script(cmd, allow_warnings=True)
 
     returns = OmegaConf.load(f"{tmpdir}/optimization_results.yaml")
 
