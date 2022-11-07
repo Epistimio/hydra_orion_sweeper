@@ -17,7 +17,6 @@ from pytest import mark
 from hydra_plugins.hydra_orion_sweeper import implementation
 from hydra_plugins.hydra_orion_sweeper.orion_sweeper import OrionSweeper
 
-
 chdir_plugin_root()
 
 parametrization = dict(
