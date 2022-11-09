@@ -332,7 +332,7 @@ def clientctx(client):
         client.close()
 
 
-# pylint: disable=too-many-public-methods
+# pylint: disable=too-many-public-methods,too-many-instance-attributes
 class OrionSweeperImpl(Sweeper):
     """Implementation of the orion Sweeper"""
 
