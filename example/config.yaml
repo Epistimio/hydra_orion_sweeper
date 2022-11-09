@@ -2,6 +2,11 @@ defaults:
   - override hydra/sweeper: orion
 
 hydra:
+  job:
+    env_set:
+      PREVIOUS_CHECKPOINT: ${hydra.sweeper.orion.previous_checkpoint}
+      CURRENT_CHECKPOINT: ${hydra.runtime.output_dir}
+
   # makes sure each multirun ends up in a unique folder
   # the defaults can make overlapping folders
   sweep:
@@ -16,14 +21,14 @@ hydra:
         lr: "uniform(0, 1)"
       dropout: "uniform(0, 1)"
       batch_size: "uniform(4, 16, discrete=True)"
-      epoch: "fidelity(10, 100)"
+      epoch: "fidelity(3, 100)"
 
     orion:
       name: 'experiment'
       version: '1'
 
     algorithm:
-      type: random
+      type: hyperband
       config:
         seed: 1
 

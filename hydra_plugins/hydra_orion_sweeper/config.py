@@ -23,6 +23,8 @@ class OrionClientConf:
     trial: Optional[str] = None
     uuid: Optional[str] = None
 
+    previous_checkpoint: Optional[str] = None
+
 
 @dataclass
 class WorkerConf:

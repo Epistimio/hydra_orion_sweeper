@@ -159,16 +159,19 @@ def override_parser():
     return parser
 
 
-def as_overrides(trial, additional, uuid):
+def as_overrides(trial, additional, uuid, prev_checkpoint):
     """Returns the trial arguments as hydra overrides"""
     kwargs = deepcopy(additional)
     kwargs.update(flatten(trial.params))
 
     args = [f"{k}={v}" for k, v in kwargs.items()]
+
     args += [
         f"hydra.sweeper.orion.id={trial.experiment}",
         f"hydra.sweeper.orion.trial={trial.id}",
         f"hydra.sweeper.orion.uuid={uuid}",
+        f"hydra.sweeper.orion.previous_checkpoint={prev_checkpoint}",
+        # "hydra.sweeper.orion.current_checkpoint=$hydra.runtime.output_dir",
     ]
     return tuple(args)
 
@@ -350,6 +353,7 @@ class OrionSweeperImpl(Sweeper):
         self.client = None
         self.storage = None
         self.uuid = uuid.uuid1().hex
+        self.resume_paths = dict()
 
         self.orion_config = orion
         self.worker_config = worker
@@ -532,10 +536,15 @@ class OrionSweeperImpl(Sweeper):
         self.pending_trials.update(set(trials))
         return trials
 
+    def trial_as_override(self, trial: Trial):
+        """Create overrides for a specific trial"""
+        checkpoint = self.resume_paths.get(trial.hash_params)
+        return as_overrides(trial, self.arguments, self.uuid, checkpoint)
+
     def execute_trials(self, trials: List[Trial]) -> Sequence[JobReturn]:
         """Execture the given batch of trials"""
 
-        overrides = list(as_overrides(t, self.arguments, self.uuid) for t in trials)
+        overrides = list(self.trial_as_override(t) for t in trials)
         self.validate_batch_is_legal(overrides)
 
         returns = self.launcher.launch(overrides, initial_job_idx=self.job_idx)
@@ -547,6 +556,10 @@ class OrionSweeperImpl(Sweeper):
     ) -> None:
         """Observe a single trial"""
         value = result.return_value
+
+        if result.hydra_cfg:
+            trialdir = result.hydra_cfg["hydra"]["runtime"]["output_dir"]
+            self.resume_paths[trial.hash_params] = trialdir
 
         try:
             objective = to_objective(value)
