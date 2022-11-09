@@ -240,7 +240,7 @@ def test_orion_example(
         assert best_parameters.batch_size == 4  # this argument should be easy to find
 
     # check that all job folders are created
-    last_job = max(int(fp.name) for fp in Path(tmpdir).iterdir() if fp.name.isdigit())
+    last_job = max(int(fp.name) for fp in Path(tmpdir).rglob("*") if fp.name.isdigit())
     assert last_job == budget - 1
 
 
