@@ -5,6 +5,7 @@ Implements a sweeper plugin for Orion.
 import logging
 import os
 import re
+import uuid
 from collections import defaultdict
 from contextlib import contextmanager
 from copy import deepcopy
@@ -158,11 +159,18 @@ def override_parser():
     return parser
 
 
-def as_overrides(trial, additional):
+def as_overrides(trial, additional, uuid):
     """Returns the trial arguments as hydra overrides"""
     kwargs = deepcopy(additional)
     kwargs.update(flatten(trial.params))
-    return tuple(f"{k}={v}" for k, v in kwargs.items())
+
+    args = [f"{k}={v}" for k, v in kwargs.items()]
+    args += [
+        f"hydra.sweeper.orion.id={trial.experiment}",
+        f"hydra.sweeper.orion.trial={trial.id}",
+        f"hydra.sweeper.orion.uuid={uuid}",
+    ]
+    return tuple(args)
 
 
 def to_objective(value):
@@ -324,7 +332,7 @@ def clientctx(client):
         client.close()
 
 
-# pylint: disable=too-many-public-methods
+# pylint: disable=too-many-public-methods,too-many-instance-attributes
 class OrionSweeperImpl(Sweeper):
     """Implementation of the orion Sweeper"""
 
@@ -341,6 +349,7 @@ class OrionSweeperImpl(Sweeper):
         self.pending_trials = set()
         self.client = None
         self.storage = None
+        self.uuid = uuid.uuid1().hex
 
         self.orion_config = orion
         self.worker_config = worker
@@ -526,7 +535,7 @@ class OrionSweeperImpl(Sweeper):
     def execute_trials(self, trials: List[Trial]) -> Sequence[JobReturn]:
         """Execture the given batch of trials"""
 
-        overrides = list(as_overrides(t, self.arguments) for t in trials)
+        overrides = list(as_overrides(t, self.arguments, self.uuid) for t in trials)
         self.validate_batch_is_legal(overrides)
 
         returns = self.launcher.launch(overrides, initial_job_idx=self.job_idx)
