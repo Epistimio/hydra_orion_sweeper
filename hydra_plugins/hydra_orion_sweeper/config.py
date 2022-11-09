@@ -18,6 +18,11 @@ class OrionClientConf:
     debug: Optional[bool] = False
     workspace: Optional[str] = None
 
+    # Set by the plugin
+    id: Optional[str] = None
+    trial: Optional[str] = None
+    uuid: Optional[str] = None
+
 
 @dataclass
 class WorkerConf:
