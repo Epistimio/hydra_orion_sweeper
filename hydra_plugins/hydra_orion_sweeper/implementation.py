@@ -557,8 +557,11 @@ class OrionSweeperImpl(Sweeper):
         """Observe a single trial"""
         value = result.return_value
 
-        trialdir = result.hydra_cfg["hydra"]["runtime"]["output_dir"]
-        self.resume_paths[trial.hash_params] = trialdir
+        trialdir = (
+            result.hydra_cfg.get("hydra", {}).get("runtime", {}).get("output_dir", None)
+        )
+        if trialdir:
+            self.resume_paths[trial.hash_params] = trialdir
 
         try:
             objective = to_objective(value)
