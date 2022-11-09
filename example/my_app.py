@@ -56,8 +56,6 @@ def dummy_training(cfg: DictConfig) -> float:
     lr = 0.12, dropout=0.33, opt=Adam, batch_size=4
     """
     
-    # print(cfg.hydra )
-    
     # makes sure folders are unique
     os.makedirs('newdir', exist_ok=False)
     

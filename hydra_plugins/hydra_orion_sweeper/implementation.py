@@ -13,7 +13,6 @@ from dataclasses import asdict
 from typing import Any, List, Optional, Sequence, Union
 
 from hydra.core import utils
-from hydra.core.global_hydra import GlobalHydra
 from hydra.core.override_parser.overrides_parser import OverridesParser
 from hydra.core.override_parser.types import Override, QuotedString
 from hydra.core.plugins import Plugins
