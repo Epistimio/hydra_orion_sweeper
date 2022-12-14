@@ -58,7 +58,7 @@ class StorageConf:
     """
 
     type: str = "legacy"
-    database: Database = Database()
+    database: Database = field(default_factory=Database)
 
     # if true filesystem based databases will use hydra working dir as base path
     # if you want a single database for all your run you should set this to false
@@ -82,13 +82,13 @@ class OrionSweeperConf:
 
     _target_: str = "hydra_plugins.hydra_orion_sweeper.orion_sweeper.OrionSweeper"
 
-    orion: OrionClientConf = OrionClientConf()
+    orion: OrionClientConf = field(default_factory=OrionClientConf)
 
-    worker: WorkerConf = WorkerConf()
+    worker: WorkerConf = field(default_factory=WorkerConf)
 
-    algorithm: AlgorithmConf = AlgorithmConf()
+    algorithm: AlgorithmConf = field(default_factory=AlgorithmConf)
 
-    storage: StorageConf = StorageConf()
+    storage: StorageConf = field(default_factory=StorageConf)
 
     # deprecated, use params instead
     parametrization: Optional[Dict[str, Any]] = None
