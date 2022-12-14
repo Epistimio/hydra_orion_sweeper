@@ -187,7 +187,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;legacy&quot;</span>
-    <span class="n">database</span><span class="p">:</span> <span class="n">Database</span> <span class="o">=</span> <span class="n">Database</span><span class="p">()</span>
+    <span class="n">database</span><span class="p">:</span> <span class="n">Database</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">Database</span><span class="p">)</span>
 
     <span class="c1"># if true filesystem based databases will use hydra working dir as base path</span>
     <span class="c1"># if you want a single database for all your run you should set this to false</span>
@@ -211,13 +211,13 @@
 
     <span class="n">_target_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hydra_plugins.hydra_orion_sweeper.orion_sweeper.OrionSweeper&quot;</span>
 
-    <span class="n">orion</span><span class="p">:</span> <span class="n">OrionClientConf</span> <span class="o">=</span> <span class="n">OrionClientConf</span><span class="p">()</span>
+    <span class="n">orion</span><span class="p">:</span> <span class="n">OrionClientConf</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">OrionClientConf</span><span class="p">)</span>
 
-    <span class="n">worker</span><span class="p">:</span> <span class="n">WorkerConf</span> <span class="o">=</span> <span class="n">WorkerConf</span><span class="p">()</span>
+    <span class="n">worker</span><span class="p">:</span> <span class="n">WorkerConf</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">WorkerConf</span><span class="p">)</span>
 
-    <span class="n">algorithm</span><span class="p">:</span> <span class="n">AlgorithmConf</span> <span class="o">=</span> <span class="n">AlgorithmConf</span><span class="p">()</span>
+    <span class="n">algorithm</span><span class="p">:</span> <span class="n">AlgorithmConf</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">AlgorithmConf</span><span class="p">)</span>
 
-    <span class="n">storage</span><span class="p">:</span> <span class="n">StorageConf</span> <span class="o">=</span> <span class="n">StorageConf</span><span class="p">()</span>
+    <span class="n">storage</span><span class="p">:</span> <span class="n">StorageConf</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">StorageConf</span><span class="p">)</span>
 
     <span class="c1"># deprecated, use params instead</span>
     <span class="n">parametrization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
