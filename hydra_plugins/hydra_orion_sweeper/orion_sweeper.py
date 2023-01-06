@@ -18,7 +18,6 @@ class OrionSweeper(Sweeper):
 
     def __init__(
         self,
-        orion: Optional[OrionClientConf],
         experiment: Optional[OrionClientConf],
         worker: WorkerConf,
         algorithm: AlgorithmConf,
@@ -27,22 +26,6 @@ class OrionSweeper(Sweeper):
         params: Optional[DictConfig],
     ):
         from .implementation import OrionSweeperImpl
-
-        if orion is not None and experiment is not None:
-            warn(
-                "`hydra.sweeper.orion` is deprecated;"
-                "move the values to experiment"
-                "`hydra.sweeper.orion` are ignored",
-                DeprecationWarning,
-            )
-
-        if orion is not None and experiment is None:
-            warn(
-                "`hydra.sweeper.orion` is deprecated;"
-                "use `hydra.sweeper.experiment` instead",
-                DeprecationWarning,
-            )
-            experiment = orion
 
         # >>> Remove with Issue #8
         if parametrization is not None and params is None:

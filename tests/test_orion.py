@@ -42,8 +42,7 @@ def load_hydra_testing_config():
 
 def orion_configuration():
     return dict(
-        orion=OmegaConf.structured(OrionClientConf()),
-        experiment=None,
+        experiment=OmegaConf.structured(OrionClientConf()),
         worker=OmegaConf.structured(WorkerConf()),
         algorithm=OmegaConf.structured(AlgorithmConf()),
         storage=OmegaConf.structured(StorageConf()),

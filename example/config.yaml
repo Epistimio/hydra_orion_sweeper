@@ -18,7 +18,7 @@ hydra:
       batch_size: "uniform(4, 16, discrete=True)"
       epoch: "fidelity(10, 100)"
 
-    orion:
+    experiment:
       name: 'experiment'
       version: '1'
 

@@ -33,9 +33,9 @@ setup(
     ],
     install_requires=[
         'typing_extensions',
-        "hydra-core<=1.2",
+        "hydra-core",
         "orion>=0.2.2",
-        "omegaconf~=2.2",
+        "omegaconf",
     ],
     include_package_data=True,
 )
