@@ -166,9 +166,9 @@ def as_overrides(trial, additional, uuid):
 
     args = [f"{k}={v}" for k, v in kwargs.items()]
     args += [
-        f"hydra.sweeper.orion.id={trial.experiment}",
-        f"hydra.sweeper.orion.trial={trial.id}",
-        f"hydra.sweeper.orion.uuid={uuid}",
+        f"hydra.sweeper.experiment.id={trial.experiment}",
+        f"hydra.sweeper.experiment.trial={trial.id}",
+        f"hydra.sweeper.experiment.uuid={uuid}",
     ]
     return tuple(args)
 
@@ -338,7 +338,7 @@ class OrionSweeperImpl(Sweeper):
 
     def __init__(
         self,
-        orion: OrionClientConf,
+        experiment: OrionClientConf,
         worker: WorkerConf,
         algorithm: AlgorithmConf,
         storage: StorageConf,
@@ -351,7 +351,7 @@ class OrionSweeperImpl(Sweeper):
         self.storage = None
         self.uuid = uuid.uuid1().hex
 
-        self.orion_config = orion
+        self.orion_config = experiment
         self.worker_config = worker
         self.algo_config = algorithm
         self.storage_config = storage

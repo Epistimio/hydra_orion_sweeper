@@ -82,7 +82,9 @@ class OrionSweeperConf:
 
     _target_: str = "hydra_plugins.hydra_orion_sweeper.orion_sweeper.OrionSweeper"
 
-    orion: OrionClientConf = field(default_factory=OrionClientConf)
+    orion: Optional[OrionClientConf] = field(default_factory=OrionClientConf)
+
+    experiment: Optional[OrionClientConf] = field(default_factory=OrionClientConf)
 
     worker: WorkerConf = field(default_factory=WorkerConf)
 

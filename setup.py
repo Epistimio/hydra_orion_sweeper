@@ -33,7 +33,7 @@ setup(
     ],
     install_requires=[
         'typing_extensions',
-        "hydra-core>=1.2",
+        "hydra-core==1.2",
         "orion>=0.2.2",
     ],
     include_package_data=True,
