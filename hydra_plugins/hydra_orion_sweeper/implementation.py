@@ -167,11 +167,11 @@ def as_overrides(trial, additional, uuid, prev_checkpoint):
     args = [f"{k}={v}" for k, v in kwargs.items()]
 
     args += [
-        f"hydra.sweeper.client.id={trial.experiment}",
-        f"hydra.sweeper.client.trial={trial.id}",
-        f"hydra.sweeper.client.uuid={uuid}",
-        f"hydra.sweeper.client.previous_checkpoint={prev_checkpoint}",
-        # "hydra.sweeper.client.current_checkpoint=$hydra.runtime.output_dir",
+        f"hydra.sweeper.experiment.id={trial.experiment}",
+        f"hydra.sweeper.experiment.trial={trial.id}",
+        f"hydra.sweeper.experiment.uuid={uuid}",
+        f"hydra.sweeper.experiment.previous_checkpoint={prev_checkpoint}",
+        # "hydra.sweeper.experiment.current_checkpoint=$hydra.runtime.output_dir",
     ]
     return tuple(args)
 
@@ -341,7 +341,7 @@ class OrionSweeperImpl(Sweeper):
 
     def __init__(
         self,
-        client: OrionClientConf,
+        experiment: OrionClientConf,
         worker: WorkerConf,
         algorithm: AlgorithmConf,
         storage: StorageConf,
@@ -355,7 +355,7 @@ class OrionSweeperImpl(Sweeper):
         self.uuid = uuid.uuid1().hex
         self.resume_paths = dict()
 
-        self.orion_config = client
+        self.orion_config = experiment
         self.worker_config = worker
         self.algo_config = algorithm
         self.storage_config = storage

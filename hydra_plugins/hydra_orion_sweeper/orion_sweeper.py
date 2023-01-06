@@ -18,7 +18,7 @@ class OrionSweeper(Sweeper):
 
     def __init__(
         self,
-        client: OrionClientConf,
+        experiment: OrionClientConf,
         worker: WorkerConf,
         algorithm: AlgorithmConf,
         storage: StorageConf,
@@ -30,7 +30,7 @@ class OrionSweeper(Sweeper):
         # >>> Remove with Issue #8
         if parametrization is not None and params is None:
             warn(
-                "`hydra.sweeper.orion.parametrization` is deprecated;"
+                "`hydra.sweeper.experiment.parametrization` is deprecated;"
                 "use `hydra.sweeper.params` instead",
                 DeprecationWarning,
             )
@@ -38,7 +38,7 @@ class OrionSweeper(Sweeper):
 
         elif parametrization is not None and params is not None:
             warn(
-                "Both `hydra.sweeper.orion.parametrization` and `hydra.sweeper.params` are defined;"
+                "Both `hydra.sweeper.experiment.parametrization` and `hydra.sweeper.params` are defined;"
                 "using `hydra.sweeper.params`",
                 DeprecationWarning,
             )
@@ -47,7 +47,7 @@ class OrionSweeper(Sweeper):
         if params is None:
             params = dict()
 
-        self.sweeper = OrionSweeperImpl(client, worker, algorithm, storage, params)
+        self.sweeper = OrionSweeperImpl(experiment, worker, algorithm, storage, params)
 
     def setup(
         self,

@@ -25,7 +25,7 @@ def test_parametrization_is_deprecated():
     assert (
         warnings[0]
         .message.args[0]
-        .startswith("`hydra.sweeper.orion.parametrization` is deprecated;")
+        .startswith("`hydra.sweeper.experiment.parametrization` is deprecated;")
     )
 
 
@@ -44,7 +44,7 @@ def test_parametrization_and_params():
     assert (
         warnings[0]
         .message.args[0]
-        .startswith("Both `hydra.sweeper.orion.parametrization` and")
+        .startswith("Both `hydra.sweeper.experiment.parametrization` and")
     )
 
 
