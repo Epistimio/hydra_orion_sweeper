@@ -287,5 +287,6 @@ def test_return_format(format: str, tmpdir: Path) -> None:
         format_error = "InvalidResult: Value 'None' of type '<class 'NoneType'>' is not an expected return type"
         broken_error_string = "BrokenExperiment: Max broken trials reached, stopping"
 
+        print(err)
         assert format_error in err
         assert broken_error_string in err
