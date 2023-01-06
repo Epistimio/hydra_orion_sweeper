@@ -84,7 +84,7 @@ class OrionSweeperConf:
 
     _target_: str = "hydra_plugins.hydra_orion_sweeper.orion_sweeper.OrionSweeper"
 
-    orion: OrionClientConf = OrionClientConf()
+    client: OrionClientConf = OrionClientConf()
 
     worker: WorkerConf = WorkerConf()
 

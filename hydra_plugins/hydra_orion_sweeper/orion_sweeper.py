@@ -18,7 +18,7 @@ class OrionSweeper(Sweeper):
 
     def __init__(
         self,
-        orion: OrionClientConf,
+        client: OrionClientConf,
         worker: WorkerConf,
         algorithm: AlgorithmConf,
         storage: StorageConf,
@@ -47,7 +47,7 @@ class OrionSweeper(Sweeper):
         if params is None:
             params = dict()
 
-        self.sweeper = OrionSweeperImpl(orion, worker, algorithm, storage, params)
+        self.sweeper = OrionSweeperImpl(client, worker, algorithm, storage, params)
 
     def setup(
         self,

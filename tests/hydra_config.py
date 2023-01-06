@@ -7,7 +7,7 @@
         },
         "sweeper": {
             "_target_": "hydra_plugins.hydra_orion_sweeper.orion_sweeper.OrionSweeper",
-            "orion": {
+            "client": {
                 "name": None,
                 "version": None,
                 "branching": None,
