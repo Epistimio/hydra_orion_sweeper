@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hydra Sweeper plugin for Orion &mdash; Hydra Orion Sweeper 1.5.1 documentation</title>
@@ -12,9 +12,6 @@
   <![endif]-->
   
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -138,7 +135,7 @@ algorithms for the optimization of the parameters of any experiment.</p>
 <p>See <a class="reference external" href="https://orion.readthedocs.io">website</a> for more information</p>
 <section id="install">
 <h2>Install<a class="headerlink" href="#install" title="Permalink to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install hydra-orion-sweeper
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>hydra-orion-sweeper
 </pre></div>
 </div>
 </section>
@@ -209,6 +206,9 @@ configurations are simply passed through.</p>
 <p>If the orion database path is relative; orion will create one database per multirun,
 this is because hydra is in charge of the working directory, and hydra creates a new directory per run.</p>
 <p>To share a database between multiruns you can use an absolute path.</p>
+<p>This also means, that if the database path is relative the HPO runs are never resumed
+and always start from scratch.</p>
+<p>You can use an absolute path to resume a previous run.</p>
 </div>
 </section>
 <section id="code">
@@ -218,7 +218,7 @@ this is because hydra is in charge of the working directory, and hydra creates a
 
 <span class="nd">@hydra</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">config_name</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">DictConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-   <span class="sd">&quot;&quot;&quot;Simple main function&quot;&quot;&quot;</span>
+<span class="w">   </span><span class="sd">&quot;&quot;&quot;Simple main function&quot;&quot;&quot;</span>
    <span class="n">a</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">a</span>
    <span class="n">b</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">b</span>
 

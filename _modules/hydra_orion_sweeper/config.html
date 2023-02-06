@@ -11,9 +11,6 @@
   <![endif]-->
   
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -139,7 +136,7 @@
 
 <div class="viewcode-block" id="OrionClientConf"><a class="viewcode-back" href="../../api.html#hydra_orion_sweeper.config.OrionClientConf">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">OrionClientConf</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Orion EVC options&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Orion EVC options&quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -155,7 +152,7 @@
 
 <div class="viewcode-block" id="WorkerConf"><a class="viewcode-back" href="../../api.html#hydra_orion_sweeper.config.WorkerConf">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">WorkerConf</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Orion Worker configuration</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Orion Worker configuration</span>
 
 <span class="sd">    See `worker &lt;https://orion.readthedocs.io/en/stable/user/config.html#worker&gt;`_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -170,7 +167,7 @@
 
 <div class="viewcode-block" id="Database"><a class="viewcode-back" href="../../api.html#hydra_orion_sweeper.config.Database">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Database</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Orion database configuration</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Orion database configuration</span>
 
 <span class="sd">    See `Database &lt;https://orion.readthedocs.io/en/stable/user/config.html#database&gt;`_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -181,7 +178,7 @@
 
 <div class="viewcode-block" id="StorageConf"><a class="viewcode-back" href="../../api.html#hydra_orion_sweeper.config.StorageConf">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">StorageConf</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Orion storage configuration</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Orion storage configuration</span>
 
 <span class="sd">    See `storage &lt;https://orion.readthedocs.io/en/stable/user/storage.html&gt;`_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -196,7 +193,7 @@
 
 <div class="viewcode-block" id="AlgorithmConf"><a class="viewcode-back" href="../../api.html#hydra_orion_sweeper.config.AlgorithmConf">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">AlgorithmConf</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Orion optimization algorithm configuration</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Orion optimization algorithm configuration</span>
 
 <span class="sd">    See `algorithms &lt;https://orion.readthedocs.io/en/stable/user/algorithms.html&gt;`_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -207,7 +204,7 @@
 
 <div class="viewcode-block" id="OrionSweeperConf"><a class="viewcode-back" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">OrionSweeperConf</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Orion Sweeper configuration&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Orion Sweeper configuration&quot;&quot;&quot;</span>
 
     <span class="n">_target_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hydra_plugins.hydra_orion_sweeper.orion_sweeper.OrionSweeper&quot;</span>
 
