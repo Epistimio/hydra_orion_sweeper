@@ -112,6 +112,11 @@ Configuration
    this is because hydra is in charge of the working directory, and hydra creates a new directory per run.
 
    To share a database between multiruns you can use an absolute path.
+   
+   This also means, that if the database path is relative the HPO runs are never resumed
+   and always start from scratch.
+   
+   You can use an absolute path to resume a previous run.
 
 
 Code
