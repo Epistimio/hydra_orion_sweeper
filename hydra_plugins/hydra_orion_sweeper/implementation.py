@@ -42,6 +42,7 @@ logger = logging.getLogger(__name__)
 
 NESTED_DIM_REGEX = re.compile(r"[A-Za-z0-9]*(\.[A-Za-z0-9]*)+=.*")
 
+
 # pylint: disable=too-few-public-methods
 class SpaceFunction:
     """Type to recognize orion functions parsed by the override parser"""
@@ -585,7 +586,7 @@ class OrionSweeperImpl(Sweeper):
         results = self.client.stats
 
         best_params = self.client.get_trial(uid=results.best_trials_id).params
-            
+
         print(results)
         results = asdict(results)
         results["name"] = "orion"
