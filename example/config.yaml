@@ -6,7 +6,7 @@ hydra:
   # the defaults can make overlapping folders
   sweep:
     dir: multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
-    subdir: ${hydra.sweeper.orion.name}/${hydra.sweeper.orion.uuid}/${hydra.job.id}
+    subdir: ${hydra.sweeper.experiment.name}/${hydra.sweeper.experiment.uuid}/${hydra.job.id}
 
   sweeper:
     # default parametrization of the search space
@@ -18,7 +18,7 @@ hydra:
       batch_size: "uniform(4, 16, discrete=True)"
       epoch: "fidelity(10, 100)"
 
-    orion:
+    experiment:
       name: 'experiment'
       version: '1'
 

@@ -42,6 +42,7 @@ logger = logging.getLogger(__name__)
 
 NESTED_DIM_REGEX = re.compile(r"[A-Za-z0-9]*(\.[A-Za-z0-9]*)+=.*")
 
+
 # pylint: disable=too-few-public-methods
 class SpaceFunction:
     """Type to recognize orion functions parsed by the override parser"""
@@ -166,9 +167,9 @@ def as_overrides(trial, additional, uuid):
 
     args = [f"{k}={v}" for k, v in kwargs.items()]
     args += [
-        f"hydra.sweeper.orion.id={trial.experiment}",
-        f"hydra.sweeper.orion.trial={trial.id}",
-        f"hydra.sweeper.orion.uuid={uuid}",
+        f"hydra.sweeper.experiment.id={trial.experiment}",
+        f"hydra.sweeper.experiment.trial={trial.id}",
+        f"hydra.sweeper.experiment.uuid={uuid}",
     ]
     return tuple(args)
 
@@ -338,7 +339,7 @@ class OrionSweeperImpl(Sweeper):
 
     def __init__(
         self,
-        orion: OrionClientConf,
+        experiment: OrionClientConf,
         worker: WorkerConf,
         algorithm: AlgorithmConf,
         storage: StorageConf,
@@ -351,7 +352,7 @@ class OrionSweeperImpl(Sweeper):
         self.storage = None
         self.uuid = uuid.uuid1().hex
 
-        self.orion_config = orion
+        self.orion_config = experiment
         self.worker_config = worker
         self.algo_config = algorithm
         self.storage_config = storage
@@ -586,12 +587,15 @@ class OrionSweeperImpl(Sweeper):
 
         best_params = self.client.get_trial(uid=results.best_trials_id).params
 
+        print(results)
         results = asdict(results)
         results["name"] = "orion"
         results["best_evaluated_params"] = best_params
         results["start_time"] = str(results["start_time"])
         results["finish_time"] = str(results["finish_time"])
-        results["duration"] = str(results["duration"])
+        results["elapsed_time"] = str(results.get("elapsed_time", 0))
+        results["sum_of_trials_time"] = str(results.get("sum_of_trials_time", 0))
+        results["eta"] = str(results.get("eta", 0))
 
         OmegaConf.save(
             OmegaConf.create(results),

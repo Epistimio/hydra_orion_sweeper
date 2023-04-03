@@ -8,15 +8,12 @@ import sys
 log = logging.getLogger(__name__)
 
 
-@hydra.main(config_path=".", config_name="config", version_base="1.1")
+@hydra.main(config_path=".", config_name="config", version_base=None)
 def dummy_training(cfg: DictConfig) -> float:
     """A dummy function to minimize
     Minimum is 0.0 at:
     lr = 0.12, dropout=0.33, opt=Adam, batch_size=4
     """
-    
-    # makes sure folders are unique
-    os.makedirs('newdir', exist_ok=False)
     
     do = cfg.dropout
     bs = cfg.batch_size
