@@ -591,7 +591,7 @@ class OrionSweeperImpl(Sweeper):
         results["best_evaluated_params"] = best_params
         results["start_time"] = str(results["start_time"])
         results["finish_time"] = str(results["finish_time"])
-        results["duration"] = str(results.get("duration", 0))
+        results["elapsed_time"] = str(results.get("elapsed_time", 0))
 
         OmegaConf.save(
             OmegaConf.create(results),
