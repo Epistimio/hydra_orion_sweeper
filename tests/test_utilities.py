@@ -12,7 +12,6 @@ choices_formats = [[4, 6, 8], ["a", "b", "c", "d"], dict(a=0.25, b=0.75)]
 
 @pytest.mark.parametrize("options", choices_formats)
 def test_choices(options):
-
     dim = choices(options)("dimname")
 
     assert dim.get_prior_string() == f"choices({options})"

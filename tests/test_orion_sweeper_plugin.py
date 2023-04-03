@@ -231,7 +231,7 @@ def test_orion_example(
 
     assert isinstance(returns, DictConfig)
     assert returns.name == "orion"
-    assert len(returns) == 8
+    assert len(returns) == 15
 
     best_parameters = returns.best_evaluated_params
     assert not best_parameters.dropout.is_integer()
