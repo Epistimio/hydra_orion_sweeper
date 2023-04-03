@@ -585,13 +585,16 @@ class OrionSweeperImpl(Sweeper):
         results = self.client.stats
 
         best_params = self.client.get_trial(uid=results.best_trials_id).params
-
+            
+        print(results)
         results = asdict(results)
         results["name"] = "orion"
         results["best_evaluated_params"] = best_params
         results["start_time"] = str(results["start_time"])
         results["finish_time"] = str(results["finish_time"])
         results["elapsed_time"] = str(results.get("elapsed_time", 0))
+        results["sum_of_trials_time"] = str(results.get("sum_of_trials_time", 0))
+        results["eta"] = str(results.get("eta", 0))
 
         OmegaConf.save(
             OmegaConf.create(results),
