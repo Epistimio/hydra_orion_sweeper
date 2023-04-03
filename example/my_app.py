@@ -8,7 +8,7 @@ import sys
 log = logging.getLogger(__name__)
 
 
-@hydra.main(config_path=".", config_name="config", version_base="1.1")
+@hydra.main(config_path=".", config_name="config", version_base=None)
 def dummy_training(cfg: DictConfig) -> float:
     """A dummy function to minimize
     Minimum is 0.0 at:
