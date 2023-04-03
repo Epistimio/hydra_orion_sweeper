@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Orion Sweeper &mdash; Hydra Orion Sweeper 1.5.1 documentation</title>
@@ -11,6 +11,7 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
@@ -25,14 +26,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Hydra Orion Sweeper
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Hydra Orion Sweeper
           </a>
               <div class="version">
                 1.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -75,7 +80,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#hydra_orion_sweeper.config.OrionSweeperConf"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#hydra_orion_sweeper.config.OrionSweeperConf.algorithm"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.algorithm</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hydra_orion_sweeper.config.OrionSweeperConf.orion"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.orion</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hydra_orion_sweeper.config.OrionSweeperConf.experiment"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.experiment</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hydra_orion_sweeper.config.OrionSweeperConf.parametrization"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.parametrization</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hydra_orion_sweeper.config.OrionSweeperConf.params"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.params</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hydra_orion_sweeper.config.OrionSweeperConf.storage"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.storage</span></code></a></li>
@@ -114,7 +119,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Orion Sweeper</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
@@ -132,7 +137,7 @@
 <p>Implements a sweeper plugin for Orion</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="hydra_orion_sweeper.orion_sweeper.OrionSweeper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hydra_orion_sweeper.orion_sweeper.</span></span><span class="sig-name descname"><span class="pre">OrionSweeper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hydra_orion_sweeper.config.OrionClientConf" title="hydra_orion_sweeper.config.OrionClientConf"><span class="pre">OrionClientConf</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">worker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hydra_orion_sweeper.config.WorkerConf" title="hydra_orion_sweeper.config.WorkerConf"><span class="pre">WorkerConf</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hydra_orion_sweeper.config.AlgorithmConf" title="hydra_orion_sweeper.config.AlgorithmConf"><span class="pre">AlgorithmConf</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hydra_orion_sweeper.config.StorageConf" title="hydra_orion_sweeper.config.StorageConf"><span class="pre">StorageConf</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">parametrization</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DictConfig</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DictConfig</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydra_orion_sweeper/orion_sweeper.html#OrionSweeper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hydra_orion_sweeper.orion_sweeper.OrionSweeper" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hydra_orion_sweeper.orion_sweeper.</span></span><span class="sig-name descname"><span class="pre">OrionSweeper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hydra_orion_sweeper.config.OrionClientConf" title="hydra_orion_sweeper.config.OrionClientConf"><span class="pre">OrionClientConf</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">worker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hydra_orion_sweeper.config.WorkerConf" title="hydra_orion_sweeper.config.WorkerConf"><span class="pre">WorkerConf</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hydra_orion_sweeper.config.AlgorithmConf" title="hydra_orion_sweeper.config.AlgorithmConf"><span class="pre">AlgorithmConf</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hydra_orion_sweeper.config.StorageConf" title="hydra_orion_sweeper.config.StorageConf"><span class="pre">StorageConf</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">parametrization</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DictConfig</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DictConfig</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydra_orion_sweeper/orion_sweeper.html#OrionSweeper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hydra_orion_sweeper.orion_sweeper.OrionSweeper" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Sweeper</span></code></p>
 <p>Class to interface with Orion</p>
 <p class="rubric">Methods</p>
@@ -287,35 +292,27 @@ implementation.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hydra_orion_sweeper.config.OrionSweeperConf">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hydra_orion_sweeper.config.</span></span><span class="sig-name descname"><span class="pre">OrionSweeperConf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_target_:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'hydra_plugins.hydra_orion_sweeper.orion_sweeper.OrionSweeper'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orion:</span> <span class="pre">~hydra_orion_sweeper.config.OrionClientConf</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">worker:</span> <span class="pre">~hydra_orion_sweeper.config.WorkerConf</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm:</span> <span class="pre">~hydra_orion_sweeper.config.AlgorithmConf</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage:</span> <span class="pre">~hydra_orion_sweeper.config.StorageConf</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parametrization:</span> <span class="pre">~typing.Dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">~typing.Any]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params:</span> <span class="pre">~typing.Dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">~typing.Any]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydra_orion_sweeper/config.html#OrionSweeperConf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hydra_orion_sweeper.config.OrionSweeperConf" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hydra_orion_sweeper.config.</span></span><span class="sig-name descname"><span class="pre">OrionSweeperConf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_target_:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'hydra_plugins.hydra_orion_sweeper.orion_sweeper.OrionSweeper'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment:</span> <span class="pre">~hydra_orion_sweeper.config.OrionClientConf</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">worker:</span> <span class="pre">~hydra_orion_sweeper.config.WorkerConf</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm:</span> <span class="pre">~hydra_orion_sweeper.config.AlgorithmConf</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage:</span> <span class="pre">~hydra_orion_sweeper.config.StorageConf</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parametrization:</span> <span class="pre">~typing.Dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">~typing.Any]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params:</span> <span class="pre">~typing.Dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">~typing.Any]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydra_orion_sweeper/config.html#OrionSweeperConf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hydra_orion_sweeper.config.OrionSweeperConf" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Orion Sweeper configuration</p>
-<dl class="field-list simple">
-<dt class="field-odd">Attributes<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>parametrization</strong></dt><dd></dd>
-<dt><strong>params</strong></dt><dd></dd>
-</dl>
-</dd>
-</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hydra_orion_sweeper.config.OrionSweeperConf.algorithm">
 <span class="sig-name descname"><span class="pre">algorithm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hydra_orion_sweeper.config.AlgorithmConf" title="hydra_orion_sweeper.config.AlgorithmConf"><span class="pre">AlgorithmConf</span></a></em><a class="headerlink" href="#hydra_orion_sweeper.config.OrionSweeperConf.algorithm" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="hydra_orion_sweeper.config.OrionSweeperConf.orion">
-<span class="sig-name descname"><span class="pre">orion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hydra_orion_sweeper.config.OrionClientConf" title="hydra_orion_sweeper.config.OrionClientConf"><span class="pre">OrionClientConf</span></a></em><a class="headerlink" href="#hydra_orion_sweeper.config.OrionSweeperConf.orion" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="hydra_orion_sweeper.config.OrionSweeperConf.experiment">
+<span class="sig-name descname"><span class="pre">experiment</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hydra_orion_sweeper.config.OrionClientConf" title="hydra_orion_sweeper.config.OrionClientConf"><span class="pre">OrionClientConf</span></a></em><a class="headerlink" href="#hydra_orion_sweeper.config.OrionSweeperConf.experiment" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hydra_orion_sweeper.config.OrionSweeperConf.parametrization">
-<span class="sig-name descname"><span class="pre">parametrization</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hydra_orion_sweeper.config.OrionSweeperConf.parametrization" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parametrization</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hydra_orion_sweeper.config.OrionSweeperConf.parametrization" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hydra_orion_sweeper.config.OrionSweeperConf.params">
-<span class="sig-name descname"><span class="pre">params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hydra_orion_sweeper.config.OrionSweeperConf.params" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hydra_orion_sweeper.config.OrionSweeperConf.params" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

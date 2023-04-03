@@ -10,6 +10,7 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
@@ -23,14 +24,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> Hydra Orion Sweeper
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Hydra Orion Sweeper
           </a>
               <div class="version">
                 1.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -73,7 +78,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf.algorithm"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.algorithm</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf.orion"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.orion</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf.experiment"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.experiment</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf.parametrization"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.parametrization</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf.params"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.params</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf.storage"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.storage</span></code></a></li>
@@ -112,7 +117,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
       <li class="breadcrumb-item active">hydra_orion_sweeper.config</li>
       <li class="wy-breadcrumbs-aside">
@@ -208,7 +213,7 @@
 
     <span class="n">_target_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hydra_plugins.hydra_orion_sweeper.orion_sweeper.OrionSweeper&quot;</span>
 
-    <span class="n">orion</span><span class="p">:</span> <span class="n">OrionClientConf</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">OrionClientConf</span><span class="p">)</span>
+    <span class="n">experiment</span><span class="p">:</span> <span class="n">OrionClientConf</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">OrionClientConf</span><span class="p">)</span>
 
     <span class="n">worker</span><span class="p">:</span> <span class="n">WorkerConf</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">WorkerConf</span><span class="p">)</span>
 
@@ -217,11 +222,11 @@
     <span class="n">storage</span><span class="p">:</span> <span class="n">StorageConf</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">StorageConf</span><span class="p">)</span>
 
     <span class="c1"># deprecated, use params instead</span>
-    <span class="n">parametrization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">parametrization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
 
     <span class="c1"># Search space (Optuna &amp; default)</span>
     <span class="c1"># See `Search Space &lt;https://orion.readthedocs.io/en/stable/user/searchspace.html&gt;`_</span>
-    <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></div>
+    <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span></div>
 
     <span class="c1"># Note: Ax space is configured as hydra.sweeper.ax.ax_config.params</span>
     <span class="c1"># which is a bit too convoluted for us to support</span>
