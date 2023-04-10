@@ -169,6 +169,10 @@ def as_overrides(trial, additional, uuid):
     args += [
         f"hydra.sweeper.experiment.id={trial.experiment}",
         f"hydra.sweeper.experiment.trial={trial.id}",
+        # Note
+        #   Does not include fidelity
+        # https://orion.readthedocs.io/en/latest/code/core/worker/trial.html#orion.core.worker.trial.Trial.hash_params
+        f"hydra.sweeper.experiment.paramhash={trial.hash_params}",
         f"hydra.sweeper.experiment.uuid={uuid}",
     ]
     return tuple(args)
