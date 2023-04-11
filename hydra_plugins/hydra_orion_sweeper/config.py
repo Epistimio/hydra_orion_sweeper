@@ -85,6 +85,9 @@ class OrionSweeperConf:
 
     experiment: OrionClientConf = field(default_factory=OrionClientConf)
 
+    # dreprecated
+    orion: Optional[OrionClientConf] = None
+
     worker: WorkerConf = field(default_factory=WorkerConf)
 
     algorithm: AlgorithmConf = field(default_factory=AlgorithmConf)

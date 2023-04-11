@@ -160,7 +160,7 @@ def override_parser():
     return parser
 
 
-def as_overrides(trial, additional, uuid):
+def as_overrides(trial, additional, uuid, compat=False):
     """Returns the trial arguments as hydra overrides"""
     kwargs = deepcopy(additional)
     kwargs.update(flatten(trial.params))
@@ -175,6 +175,14 @@ def as_overrides(trial, additional, uuid):
         f"hydra.sweeper.experiment.paramhash={trial.hash_params}",
         f"hydra.sweeper.experiment.uuid={uuid}",
     ]
+
+    if compat:
+        args += [
+            f"hydra.sweeper.orion.id={trial.experiment}",
+            f"hydra.sweeper.orion.trial={trial.id}",
+            f"hydra.sweeper.orion.paramhash={trial.hash_params}",
+            f"hydra.sweeper.orion.uuid={uuid}",
+        ]
     return tuple(args)
 
 
@@ -348,6 +356,7 @@ class OrionSweeperImpl(Sweeper):
         algorithm: AlgorithmConf,
         storage: StorageConf,
         params: Optional[DictConfig],
+        compat: bool = False,
     ):
         self.space = None
         self.arguments = dict()
@@ -368,6 +377,7 @@ class OrionSweeperImpl(Sweeper):
 
         self.space_parser = SpaceParser()
         self.space_parser.add_from_parametrization(params)
+        self.compat = compat
 
     def setup(
         self,
@@ -540,7 +550,10 @@ class OrionSweeperImpl(Sweeper):
     def execute_trials(self, trials: List[Trial]) -> Sequence[JobReturn]:
         """Execture the given batch of trials"""
 
-        overrides = list(as_overrides(t, self.arguments, self.uuid) for t in trials)
+        overrides = list(
+            as_overrides(t, self.arguments, self.uuid, compat=self.compat)
+            for t in trials
+        )
         self.validate_batch_is_legal(overrides)
 
         returns = self.launcher.launch(overrides, initial_job_idx=self.job_idx)
