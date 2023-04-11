@@ -24,6 +24,7 @@ class OrionSweeper(Sweeper):
         storage: StorageConf,
         parametrization: Optional[DictConfig],
         params: Optional[DictConfig],
+        orion: Optional[OrionClientConf] = None,
     ):
         from .implementation import OrionSweeperImpl
 
@@ -47,7 +48,21 @@ class OrionSweeper(Sweeper):
         if params is None:
             params = dict()
 
-        self.sweeper = OrionSweeperImpl(experiment, worker, algorithm, storage, params)
+        compat = False
+        if orion is not None:
+            compat = True
+            warn(
+                "`hydra.sweeper.orion` as dreprecated in favour of `hydra.sweeper.experiment`."
+                "Please update to avoid misconfiguration",
+                DeprecationWarning,
+            )
+
+        if experiment is None:
+            experiment = orion
+
+        self.sweeper = OrionSweeperImpl(
+            experiment, worker, algorithm, storage, params, compat
+        )
 
     def setup(
         self,

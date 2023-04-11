@@ -81,7 +81,7 @@ Configuration
              a: "uniform(0, 1)"
              b: "uniform(0, 1)"
 
-          orion:
+          experiment:
              name: 'experiment'
              version: '1'
 

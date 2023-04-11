@@ -21,6 +21,7 @@ class OrionClientConf:
     # Set by the plugin
     id: Optional[str] = None
     trial: Optional[str] = None
+    paramhash: Optional[str] = None
     uuid: Optional[str] = None
 
 
@@ -83,6 +84,9 @@ class OrionSweeperConf:
     _target_: str = "hydra_plugins.hydra_orion_sweeper.orion_sweeper.OrionSweeper"
 
     experiment: OrionClientConf = field(default_factory=OrionClientConf)
+
+    # dreprecated
+    orion: Optional[OrionClientConf] = None
 
     worker: WorkerConf = field(default_factory=WorkerConf)
 
