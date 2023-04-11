@@ -21,6 +21,7 @@ class OrionClientConf:
     # Set by the plugin
     id: Optional[str] = None
     trial: Optional[str] = None
+    paramhash: Optional[str] = None
     uuid: Optional[str] = None
 
 
