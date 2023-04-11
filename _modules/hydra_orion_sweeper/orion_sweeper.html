@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>hydra_orion_sweeper.orion_sweeper &mdash; Hydra Orion Sweeper 1.6.1 documentation</title>
+  <title>hydra_orion_sweeper.orion_sweeper &mdash; Hydra Orion Sweeper 1.6.2 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -70,6 +70,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionClientConf.debug"><code class="docutils literal notranslate"><span class="pre">OrionClientConf.debug</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionClientConf.id"><code class="docutils literal notranslate"><span class="pre">OrionClientConf.id</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionClientConf.name"><code class="docutils literal notranslate"><span class="pre">OrionClientConf.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionClientConf.paramhash"><code class="docutils literal notranslate"><span class="pre">OrionClientConf.paramhash</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionClientConf.trial"><code class="docutils literal notranslate"><span class="pre">OrionClientConf.trial</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionClientConf.uuid"><code class="docutils literal notranslate"><span class="pre">OrionClientConf.uuid</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionClientConf.version"><code class="docutils literal notranslate"><span class="pre">OrionClientConf.version</span></code></a></li>
@@ -79,6 +80,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf.algorithm"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.algorithm</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf.experiment"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.experiment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf.orion"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.orion</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf.parametrization"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.parametrization</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf.params"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.params</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#hydra_orion_sweeper.config.OrionSweeperConf.storage"><code class="docutils literal notranslate"><span class="pre">OrionSweeperConf.storage</span></code></a></li>
@@ -155,6 +157,7 @@
         <span class="n">storage</span><span class="p">:</span> <span class="n">StorageConf</span><span class="p">,</span>
         <span class="n">parametrization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DictConfig</span><span class="p">],</span>
         <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DictConfig</span><span class="p">],</span>
+        <span class="n">orion</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OrionClientConf</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="kn">from</span> <span class="nn">.implementation</span> <span class="kn">import</span> <span class="n">OrionSweeperImpl</span>
 
@@ -178,7 +181,21 @@
         <span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">sweeper</span> <span class="o">=</span> <span class="n">OrionSweeperImpl</span><span class="p">(</span><span class="n">experiment</span><span class="p">,</span> <span class="n">worker</span><span class="p">,</span> <span class="n">algorithm</span><span class="p">,</span> <span class="n">storage</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+        <span class="n">compat</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">orion</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">compat</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;`hydra.sweeper.orion` as dreprecated in favour of `hydra.sweeper.experiment`.&quot;</span>
+                <span class="s2">&quot;Please update to avoid misconfiguration&quot;</span><span class="p">,</span>
+                <span class="ne">DeprecationWarning</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">experiment</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">experiment</span> <span class="o">=</span> <span class="n">orion</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sweeper</span> <span class="o">=</span> <span class="n">OrionSweeperImpl</span><span class="p">(</span>
+            <span class="n">experiment</span><span class="p">,</span> <span class="n">worker</span><span class="p">,</span> <span class="n">algorithm</span><span class="p">,</span> <span class="n">storage</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">compat</span>
+        <span class="p">)</span>
 
 <div class="viewcode-block" id="OrionSweeper.setup"><a class="viewcode-back" href="../../api.html#hydra_orion_sweeper.orion_sweeper.OrionSweeper.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
