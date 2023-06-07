@@ -1,5 +1,7 @@
 defaults:
+  - dataset: cifar10
   - override hydra/sweeper: orion
+
 
 hydra:
   # makes sure each multirun ends up in a unique folder
