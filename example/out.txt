@@ -1,0 +1,35 @@
+    1343 [ WARNING] TRACK [250111] track/configuration.py:40 No configuration file found
+[2023-06-07 10:48:52,347][HYDRA] Orion Optimizer {'type': 'random', 'config': {'seed': 1}}
+[2023-06-07 10:48:52,348][HYDRA] with parametrization {'batch_size': 'uniform(4, 16, discrete=True)', 'dropout': 'uniform(0, 1)', 'epoch': 'fidelity(10, 100)', 'optimizer.lr': 'uniform(0, 1)', 'optimizer.name': "choices(['Adam', 'SGD'])"}
+[2023-06-07 10:48:54,969][HYDRA] algorithms is deprecated and will be removed in v0.4.0. Use algorithm instead.
+[2023-06-07 10:48:55,777][HYDRA] Launching 8 jobs locally
+[2023-06-07 10:48:55,777][HYDRA] 	#0 : dataset=cifar10 dataset.object.fold=4 optimizer.name=SGD optimizer.lr=0.4874 epoch=100 dropout=0.8581 batch_size=7
+FOLD:  4
+[2023-06-07 10:48:55,904][__main__][INFO] - dummy_training(dropout=0.858, lr=0.487, opt=SGD, batch_size=7) = 3.896
+[2023-06-07 10:48:55,905][HYDRA] 	#1 : dataset=cifar10 dataset.object.fold=4 optimizer.name=Adam optimizer.lr=0.5066 epoch=100 dropout=0.72 batch_size=10
+FOLD:  4
+[2023-06-07 10:48:56,019][__main__][INFO] - dummy_training(dropout=0.720, lr=0.507, opt=Adam, batch_size=10) = 7.777
+[2023-06-07 10:48:56,020][HYDRA] 	#2 : dataset=cifar10 dataset.object.fold=4 optimizer.name=SGD optimizer.lr=0.6341 epoch=100 dropout=0.5606 batch_size=16
+FOLD:  4
+[2023-06-07 10:48:56,143][__main__][INFO] - dummy_training(dropout=0.561, lr=0.634, opt=SGD, batch_size=16) = 12.745
+[2023-06-07 10:48:56,144][HYDRA] 	#3 : dataset=cifar10 dataset.object.fold=4 optimizer.name=Adam optimizer.lr=0.7384 epoch=100 dropout=0.9306 batch_size=4
+FOLD:  4
+[2023-06-07 10:48:56,266][__main__][INFO] - dummy_training(dropout=0.931, lr=0.738, opt=Adam, batch_size=4) = 2.219
+[2023-06-07 10:48:56,267][HYDRA] 	#4 : dataset=cifar10 dataset.object.fold=4 optimizer.name=SGD optimizer.lr=0.3241 epoch=100 dropout=0.06771 batch_size=12
+FOLD:  4
+[2023-06-07 10:48:56,563][__main__][INFO] - dummy_training(dropout=0.068, lr=0.324, opt=SGD, batch_size=12) = 8.466
+[2023-06-07 10:48:56,564][HYDRA] 	#5 : dataset=cifar10 dataset.object.fold=4 optimizer.name=SGD optimizer.lr=0.4118 epoch=100 dropout=0.4725 batch_size=7
+FOLD:  4
+[2023-06-07 10:48:56,674][__main__][INFO] - dummy_training(dropout=0.472, lr=0.412, opt=SGD, batch_size=7) = 3.434
+[2023-06-07 10:48:56,675][HYDRA] 	#6 : dataset=cifar10 dataset.object.fold=4 optimizer.name=SGD optimizer.lr=0.7817 epoch=100 dropout=0.9587 batch_size=15
+FOLD:  4
+[2023-06-07 10:48:56,798][__main__][INFO] - dummy_training(dropout=0.959, lr=0.782, opt=SGD, batch_size=15) = 12.290
+[2023-06-07 10:48:56,798][HYDRA] 	#7 : dataset=cifar10 dataset.object.fold=4 optimizer.name=Adam optimizer.lr=0.2229 epoch=100 dropout=0.6929 batch_size=5
+FOLD:  4
+[2023-06-07 10:48:56,926][__main__][INFO] - dummy_training(dropout=0.693, lr=0.223, opt=Adam, batch_size=5) = 2.466
+[2023-06-07 10:48:56,927][HYDRA] Completed trials with results: [Result(name='objective', type='objective', value=3.8955)]
+[2023-06-07 10:48:56,939][HYDRA] Completed trials with results: [Result(name='objective', type='objective', value=7.7766)]
+[2023-06-07 10:48:56,951][HYDRA] Completed trials with results: [Result(name='objective', type='objective', value=12.7447)]
+[2023-06-07 10:48:56,964][HYDRA] Completed trials with results: [Result(name='objective', type='objective', value=2.219)]
+[2023-06-07 10:48:56,976][HYDRA] Completed trials with results: [Result(name='objective', type='objective', value=8.46639)]
+[2023-06-07 10:48:56,989][HYDRA] Completed trials with results: [Result(name='objective', type='objective', value=3.4343)]

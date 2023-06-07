@@ -1,4 +1,5 @@
 defaults:
+  - dataset: cifar10
   - override hydra/sweeper: orion
 
 hydra:

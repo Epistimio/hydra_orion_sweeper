@@ -266,14 +266,14 @@ class SpaceParser:
             else:
                 regular_args.append(arg)
 
-        parser = override_parser()
-        parsed = parser.parse_overrides(regular_args)
+        logger.debug("overrides %s", nested_overrides)
+        error = None
 
         for name, nestedargs in nested_overrides.items():
             suboverrides = dict()
             subargs = dict()
 
-            self._recursive_overrides(subargs, suboverrides, nestedargs)
+            error = self._recursive_overrides(subargs, suboverrides, nestedargs)
 
             if subargs:
                 args[name] = subargs
@@ -281,6 +281,14 @@ class SpaceParser:
             if suboverrides:
                 overrides[name] = suboverrides
 
+            if error:
+                # Not a subdim
+                regular_args.append(f"{name}.{nestedargs[0]}")
+            else:
+                error = (name, nestedargs)
+
+        parser = override_parser()
+        parsed = parser.parse_overrides(regular_args)
         for override in parsed:
             dim = self.process_overrides(override)
 
@@ -288,6 +296,8 @@ class SpaceParser:
                 args[override.get_key_element()] = override.value()
             else:
                 overrides[dim.name] = dim.get_prior_string()
+
+        return error
 
     def process_overrides(self, override: Override) -> Dimension:
         """Identify the sweep overrides and build a matching dimension"""
@@ -452,6 +462,8 @@ class OrionSweeperImpl(Sweeper):
         self.space_parser.add_from_overrides(arguments)
         self.space, self.arguments = self.space_parser.space()
 
+        logger.debug("Space is %s, args are %s", self.space, self.arguments)
+
         dict_config = OmegaConf.to_container(self.algo_config)
         algo_type = dict_config.pop("type", "random")
         algo_config = dict_config.pop("config", dict())
@@ -489,7 +501,7 @@ class OrionSweeperImpl(Sweeper):
         assert self.launcher is not None
         assert self.job_idx is not None
 
-        logger.debug("Starting new experiment")
+        logger.debug("Starting new experiment with %s", arguments)
         self.client = self.new_experiment(arguments)
 
         with clientctx(self.client):
