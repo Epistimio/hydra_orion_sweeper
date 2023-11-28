@@ -621,6 +621,7 @@ class OrionSweeperImpl(Sweeper):
         results["start_time"] = str(results["start_time"])
         results["finish_time"] = str(results["finish_time"])
         results["elapsed_time"] = str(results.get("elapsed_time", 0))
+        results["duration"] = str(results.get("duration", 0))
         results["sum_of_trials_time"] = str(results.get("sum_of_trials_time", 0))
         results["eta"] = str(results.get("eta", 0))
 
