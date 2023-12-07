@@ -25,6 +25,7 @@ class OrionClientConf:
     uuid: Optional[str] = None
     trial_working_dir[str] = None
 
+
 @dataclass
 class WorkerConf:
     """Orion Worker configuration

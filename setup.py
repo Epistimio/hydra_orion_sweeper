@@ -5,8 +5,8 @@ from setuptools import find_namespace_packages, setup
 
 with open("hydra_plugins/hydra_orion_sweeper/__init__.py") as file:
     for line in file.readlines():
-        if 'version' in line:
-            version = line.split('=')[1].strip().replace('"', "")
+        if "version" in line:
+            version = line.split("=")[1].strip().replace('"', "")
             break
 
 setup(
@@ -29,10 +29,10 @@ setup(
         "Development Status :: 4 - Beta",
     ],
     setup_requires=[
-        'setuptools',
+        "setuptools",
     ],
     install_requires=[
-        'typing_extensions',
+        "typing_extensions",
         "hydra-core",
         "orion>=0.2.2",
         "omegaconf",
