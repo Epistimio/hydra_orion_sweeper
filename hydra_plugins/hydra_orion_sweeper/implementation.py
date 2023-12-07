@@ -191,7 +191,7 @@ def to_objective(value):
     """Convert a return value into an Orion objective"""
 
     if isinstance(value, (float, int)):
-        return [dict(name="objective", type="objective", value=value)]
+        return [{"name": "objective", "type": "objective", "value": value}]
 
     if isinstance(value, dict):
         return [value]
@@ -208,9 +208,9 @@ class SpaceParser:
     """Generate an Orion space from parameters and overrides"""
 
     def __init__(self) -> None:
-        self.base_space = dict()
-        self.overrides = dict()
-        self.arguments = dict()
+        self.base_space = {}
+        self.overrides = {}
+        self.arguments = {}
 
     def space(self) -> Space:
         """Generate the final space after overrides that will be used for the optimization"""
@@ -232,8 +232,8 @@ class SpaceParser:
     ) -> None:
         for k, v in parametrization.items():
             if isinstance(v, (dict, DictConfig)):
-                subspace = dict()
-                subargs = dict()
+                subspace = {}
+                subargs = {}
 
                 self._recursive_dim_builder(subargs, subspace, v, depth + 1)
 
@@ -269,8 +269,8 @@ class SpaceParser:
 
         error = None
         for name, nestedargs in nested_overrides.items():
-            suboverrides = dict()
-            subargs = dict()
+            suboverrides = {}
+            subargs = {}
 
             error = self._recursive_overrides(subargs, suboverrides, nestedargs)
 
@@ -370,7 +370,7 @@ class OrionSweeperImpl(Sweeper):
         compat: bool = False,
     ):
         self.space = None
-        self.arguments = dict()
+        self.arguments = {}
         self.pending_trials = set()
         self.client = None
         self.storage = None
@@ -404,7 +404,7 @@ class OrionSweeperImpl(Sweeper):
 
         self.pending_trials = set()
         self.space = None
-        self.arguments = dict()
+        self.arguments = {}
 
         logger.debug("Starting launcher")
 
@@ -465,7 +465,7 @@ class OrionSweeperImpl(Sweeper):
 
         dict_config = OmegaConf.to_container(self.algo_config)
         algo_type = dict_config.pop("type", "random")
-        algo_config = dict_config.pop("config", dict())
+        algo_config = dict_config.pop("config", {})
 
         storage_config = self._patch_database_path(
             OmegaConf.to_container(self.storage_config)

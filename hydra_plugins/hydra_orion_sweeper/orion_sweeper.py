@@ -46,7 +46,7 @@ class OrionSweeper(Sweeper):
         # <<<
 
         if params is None:
-            params = dict()
+            params = {}
 
         compat = False
         if orion is not None:
