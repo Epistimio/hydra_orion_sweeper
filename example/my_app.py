@@ -14,13 +14,16 @@ def dummy_training(cfg: DictConfig) -> float:
     Minimum is 0.0 at:
     lr = 0.12, dropout=0.33, opt=Adam, batch_size=4
     """
-    
+
     print(cfg)
 
     do = cfg.dropout
     bs = cfg.batch_size
     out = float(
-        abs(do - 0.33) + int(cfg.optimizer.name == "Adam") + abs(cfg.optimizer.lr - 0.12) + abs(bs - 4)
+        abs(do - 0.33)
+        + int(cfg.optimizer.name == "Adam")
+        + abs(cfg.optimizer.lr - 0.12)
+        + abs(bs - 4)
     )
     # ..../hydra_orion_sweeper/example/multirun/2022-11-08/11-56-45/39
     # print(os.getcwd())
