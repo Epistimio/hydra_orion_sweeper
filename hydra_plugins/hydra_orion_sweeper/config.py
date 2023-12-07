@@ -23,7 +23,7 @@ class OrionClientConf:
     trial: Optional[str] = None
     paramhash: Optional[str] = None
     uuid: Optional[str] = None
-    trial_working_dir[str] = None
+    trial_working_dir: Optional[str] = None
 
 
 @dataclass
