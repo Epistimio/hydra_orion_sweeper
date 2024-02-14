@@ -29,6 +29,7 @@ algorithms for the optimization of the parameters of any experiment.
 
 See `website <https://orion.readthedocs.io>`_ for more information
 
+**Warning: PBT-style algorithms are not currently supported by this plugin.**
 
 Install
 -------
